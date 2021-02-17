@@ -40,10 +40,13 @@ total_waiting_time.place(x=0,y=200)
 total_working_time = Label(window, text=string, fg='black', font='Verdana 20')
 total_working_time.place(x=550,y=200)
 
-var = IntVar(window,0)
-for i in range(1,4): 
-    Radiobutton(window, text='holi %i' %i, value=i, variable=var).pack()
-Button(window,text='holitas', command = lambda: print(var.get())).pack()
+language_var = IntVar(window,0)
+Label(window, text='Language:', fg='black', font='Verdana 10 bold').place(x=325,y=250)
+Radiobutton(window, text='Spanish', value=0, variable=language_var).place(x=400,y=250)
+Radiobutton(window, text='English', value=1, variable=language_var).place(x=500,y=250)
+#for i in range(1,4): 
+#    Radiobutton(window, text='holi %i' %i, value=i, variable=var).pack()
+#Button(window,text='holitas', command = lambda: print(var.get())).pack()
 window.mainloop()
 
 
