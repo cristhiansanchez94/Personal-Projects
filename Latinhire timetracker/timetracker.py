@@ -31,8 +31,16 @@ text2Dict = {
 current_status='waiting'
 def StartShift(label): 
     label['font'] = 'Verdana 19 bold'
-def ChangeStatus(label): 
-    label['font'] = 'Verdana 19 bold'
+def ChangeStatus(): 
+    global current_status 
+    if current_status =='waiting': 
+        current_status = 'working'
+        working_time['font']='Verdana 19 bold'
+        waiting_time['font']='Verdana 20'
+    else: 
+        current_status = 'waiting'
+        waiting_time['font']='Verdana 19 bold'
+        working_time['font']='Verdana 20'
 def EndShift(label): 
     label['text'] = 'Stop'
 
@@ -64,7 +72,7 @@ window.resizable(0,0)
 frame = Frame(window)
 start = Button(frame, text='Start shift',width=6,command = lambda:StartShift(waiting_time))
 stop = Button(frame, text='End shift',width=6, command = lambda:EndShift(working_time))
-reset = Button(frame, text='Change',width=6, command = lambda:ChangeStatus(working_time))
+reset = Button(frame, text='Change',width=6, command = ChangeStatus)
 frame.pack(anchor='center',pady=20)
 start.pack(side='left')
 stop.pack(side='right')
