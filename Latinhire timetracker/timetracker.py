@@ -28,11 +28,12 @@ text2Dict = {
 'Wrong subject':'',
 'Not knowing the answer':''
 }
-def f1(label): 
-    label['text'] = 'Start'
-def f2(label): 
-    label['text'] = 'Reset'
-def f3(label): 
+current_status='waiting'
+def StartShift(label): 
+    label['font'] = 'Verdana 19 bold'
+def ChangeStatus(label): 
+    label['font'] = 'Verdana 19 bold'
+def EndShift(label): 
     label['text'] = 'Stop'
 
 def update_texts(*args):
@@ -61,9 +62,9 @@ window.geometry("750x500")
 window.resizable(0,0)
 #Buttons frame
 frame = Frame(window)
-start = Button(frame, text='Start shift',width=6,command = lambda:f1(label))
-stop = Button(frame, text='End shift',width=6, command = lambda:f2(label))
-reset = Button(frame, text='Change',width=6, command = lambda:f3(label2))
+start = Button(frame, text='Start shift',width=6,command = lambda:StartShift(waiting_time))
+stop = Button(frame, text='End shift',width=6, command = lambda:EndShift(working_time))
+reset = Button(frame, text='Change',width=6, command = lambda:ChangeStatus(working_time))
 frame.pack(anchor='center',pady=20)
 start.pack(side='left')
 stop.pack(side='right')
