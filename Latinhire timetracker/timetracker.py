@@ -1,6 +1,9 @@
 from tkinter import * 
 from datetime import datetime 
-counter = 18000
+import time 
+general_counter = 18000
+waiting_counter = 18000
+working_counter = 18000
 running = False 
 text1Dict = {
 'End session':'If you don’t need further explanation on this question, we can end the session. I’d really appreciate you letting me know how I did by rating our session after you exit. Thanks and have a great day!',
@@ -30,12 +33,56 @@ text2Dict = {
 }
 current_status='waiting'
 running=False 
+
+def change_time_label(label,counter):
+    tt=datetime.fromtimestamp(counter)
+    string = tt.strftime("%H:%M:%S")
+    display = string
+    label['text']=display
+
+def time_tracker(): 
+    def count(): 
+        if running: 
+            global general_counter 
+            global waiting_counter
+            global working_counter
+            if general_counter ==18000: 
+                display = 'Starting'
+                stopwatch['text']=display
+                stopwatch.after(1000,count)
+                general_counter+=1
+                waiting_counter+=1
+            else:         
+                change_time_label(stopwatch,general_counter)
+                stopwatch.after(1000,count)
+                general_counter+=1
+                if current_status=='waiting':
+                    change_time_label(total_waiting_time,waiting_counter)
+                    waiting_counter+=1
+                else: 
+                    change_time_label(total_working_time,working_counter)
+                    working_counter+=1
+
+        #if running: 
+        #    global counter 
+        #    if counter ==18000: 
+        #        display ='Starting...'
+        #    else: 
+        #        tt=datetime.fromtimestamp(counter)
+        #        string = tt.strftime("%H:%M:%S")
+        #        display = string
+        #    label['text']=display
+        #    label.after(1000,count)
+        #    counter+=1
+    count()
+
 def StartShift(label): 
     global running 
     running = True 
     start['state']='disabled'
     stop['state']='normal'
     reset['state']='normal'
+    time_tracker()
     label['font'] = 'Verdana 19 bold'
 def ChangeStatus(): 
     global current_status 
@@ -48,8 +95,10 @@ def ChangeStatus():
         waiting_time['font']='Verdana 19 bold'
         working_time['font']='Verdana 20'
 def EndShift(label): 
+    global running 
     reset['state']='disabled'
     label['text'] = 'Stop'
+    running = False
 
 def update_texts(*args):
     dictKey = case_select_var.get()
@@ -67,7 +116,7 @@ def copy_text_to_clipboard(event):
 
 
 
-tt = datetime.fromtimestamp(counter)
+tt = datetime.fromtimestamp(general_counter)
 string = tt.strftime("%H:%M:%S")
 display = string 
 #Parameters of the main window
