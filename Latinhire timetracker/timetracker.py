@@ -62,18 +62,6 @@ def time_tracker():
                 else: 
                     change_time_label(total_working_time,working_counter)
                     working_counter+=1
-
-        #if running: 
-        #    global counter 
-        #    if counter ==18000: 
-        #        display ='Starting...'
-        #    else: 
-        #        tt=datetime.fromtimestamp(counter)
-        #        string = tt.strftime("%H:%M:%S")
-        #        display = string
-        #    label['text']=display
-        #    label.after(1000,count)
-        #    counter+=1
     count()
 
 def StartShift(label): 
@@ -86,10 +74,13 @@ def StartShift(label):
     label['font'] = 'Verdana 19 bold'
 def ChangeStatus(): 
     global current_status 
+    global working_counter
+    global waiting_counter
     if current_status =='waiting': 
         current_status = 'working'
         working_time['font']='Verdana 19 bold'
         waiting_time['font']='Verdana 20'
+        working_counter+=1
     else: 
         current_status = 'waiting'
         waiting_time['font']='Verdana 19 bold'
