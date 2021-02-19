@@ -29,7 +29,13 @@ text2Dict = {
 'Not knowing the answer':''
 }
 current_status='waiting'
+running=False 
 def StartShift(label): 
+    global running 
+    running = True 
+    start['state']='disabled'
+    stop['state']='normal'
+    reset['state']='normal'
     label['font'] = 'Verdana 19 bold'
 def ChangeStatus(): 
     global current_status 
@@ -42,6 +48,7 @@ def ChangeStatus():
         waiting_time['font']='Verdana 19 bold'
         working_time['font']='Verdana 20'
 def EndShift(label): 
+    reset['state']='disabled'
     label['text'] = 'Stop'
 
 def update_texts(*args):
@@ -70,9 +77,9 @@ window.geometry("750x500")
 window.resizable(0,0)
 #Buttons frame
 frame = Frame(window)
-start = Button(frame, text='Start shift',width=6,command = lambda:StartShift(waiting_time))
-stop = Button(frame, text='End shift',width=6, command = lambda:EndShift(working_time))
-reset = Button(frame, text='Change',width=6, command = ChangeStatus)
+start = Button(frame, text='Start shift',width=6,command = lambda:StartShift(waiting_time),state='normal')
+stop = Button(frame, text='End shift',width=6, command = lambda:EndShift(working_time),state='disabled')
+reset = Button(frame, text='Change',width=6, command = ChangeStatus,state='disabled')
 frame.pack(anchor='center',pady=20)
 start.pack(side='left')
 stop.pack(side='right')
