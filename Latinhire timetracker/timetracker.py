@@ -29,7 +29,7 @@ text1Dict_spa= {
 'Violent Threats':'Brainly tiene una política de tolerancia cero para la violencia y las amenazas en nuestra plataforma. Voy a terminar y reportar esta sesión para una revisión posterior de seguridad.',
 'Illegal Activiy':'Brainly es un espacio seguro para que los estudiantes puedan recibir la ayuda que necesitan con su tarea y trabajos de la escuela. Voy a terminar y reportar esta sesión  para una revisión posterior de seguridad.',
 'Wrong subject':'Lo siento, pero no podré ayudarte con esta pregunta porque (soy un tutor de matemáticas / es muy compleja), depronto ¿quisieras publicarla en Brainly.com?',
-'Not knowing the answer':'Lo siento, pero no podré ayudar con esta pregunta porque está fuera de mi experticia. Depronto ¿quisiera preguntarle a otro tutor o publicarla en Brainly.com?'
+'Not knowing the answer':'Lo siento, pero no podré ayudar con esta pregunta porque está fuera de mi área de experticia. Depronto ¿quisieras preguntarle a otro tutor o publicarla en Brainly.com?'
 }
 text2Dict = {
 'End session':'I just wanted to double-check that my explanation was clear -if you\'re still there please let me know in the chat, otherwise I\'ll go ahead and wrap up our session. I\'d really appreciate you letting me know how I did by rating our session after you exit. Thanks and have a great day!',
