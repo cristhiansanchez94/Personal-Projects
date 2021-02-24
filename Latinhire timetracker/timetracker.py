@@ -209,7 +209,7 @@ total_working_time = Label(window, text=string, fg='black', font='Verdana 20')
 total_working_time.place(x=550,y=200)
 
 #Language selector
-language_var = IntVar(window,0)
+language_var = IntVar(window,1)
 Label(window, text='Language:', fg='black', font='Verdana 10 bold').place(x=375,y=250)
 Radiobutton(window, text='Spanish', value=0, variable=language_var).place(x=460,y=250)
 Radiobutton(window, text='English', value=1, variable=language_var).place(x=560,y=250)
