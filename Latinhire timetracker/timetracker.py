@@ -98,7 +98,6 @@ def EndShift():
     exit_window = create_exit_window()
     working_minutes = str(round(calculate_minutes(working_counter),2))
     waiting_minutes = str(round(calculate_minutes(waiting_counter),2))
-    print(working_minutes, waiting_minutes)
     Label(exit_window,text=working_minutes, fg='black', font='Verdana 13').place(x=300,y=50)
     Label(exit_window,text=waiting_minutes, fg='black', font='Verdana 13').place(x=300,y=100)
     exit_window.mainloop()
