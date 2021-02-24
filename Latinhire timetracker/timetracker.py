@@ -18,6 +18,19 @@ text1Dict = {
 'Wrong subject':'I am sorry, but I won\'t be able to help you with that question because (it is not in English/ I am a Math tutor/ it is too complex), perhaps you would like to post it on Brainly.com?',
 'Not knowing the answer':'I am sorry, but I won\'t be able to help you with that question because it is outside of my expertise. Perhaps you would like to ask a different tutor or post it on Brainly.com?'
 }
+text1Dict_spa= {
+'End session':'Si no necesitas que explique más a profundidad en esta pregunta, podemos terminar la sesión. Realmente apreciaría si me dejas saber cómo lo hice al calificar nuestra sesión una vez termine. ¡Gracias y ten un buen día!',
+'Cheating': 'Antes de comenzar, puedo preguntar, ¿es esto de un quiz, examen calificado o una evaluación con tiempo?',
+'Off-Topic': 'Por favor recuerda que la tutoría es para preguntas académicas únicamente. ¿Eres capaz de enfocarte en aprender?',
+'Offensive Language': 'Maldecir y el lenguaje ofensivo son una violación de nuestra guía comunitaria y no está permitido en Brainly. Por favor abstente de usar lenguaje irrespestuoso o tendré que terminar nuestra sesión.',
+'Disrespectful':'Este tipo de comportamiento irrespetuoso is una violación de la guía comunitaria de Brainly. Si no puedes comportarte respetuosamente conmigo, no podré continuar nuestra sesión.',
+'Sexual Content':'Brainly es un espacio seguro para que los estudiantes puedan recibir la ayuda que necesitan con su tarea y trabajos de la escuela. Voy a terminar y reportar esta sesión por violar nuestra guía comunitaria.',
+'User Needs Help':'Sólo quería recordarte que Brainly es para objetivos educacionales únicamente - ¿Eres capaz de enfocarte en aprender?',
+'Violent Threats':'Brainly tiene una política de tolerancia cero para la violencia y las amenazas en nuestra plataforma. Voy a terminar y reportar esta sesión para una revisión posterior de seguridad.',
+'Illegal Activiy':'Brainly es un espacio seguro para que los estudiantes puedan recibir la ayuda que necesitan con su tarea y trabajos de la escuela. Voy a terminar y reportar esta sesión  para una revisión posterior de seguridad.',
+'Wrong subject':'Lo siento, pero no podré ayudarte con esta pregunta porque (soy un tutor de matemáticas / es muy compleja), depronto ¿quisieras publicarla en Brainly.com?',
+'Not knowing the answer':'Lo siento, pero no podré ayudar con esta pregunta porque está fuera de mi experticia. Depronto ¿quisiera preguntarle a otro tutor o publicarla en Brainly.com?'
+}
 text2Dict = {
 'End session':'I just wanted to double-check that my explanation was clear -if you\'re still there please let me know in the chat, otherwise I\'ll go ahead and wrap up our session. I\'d really appreciate you letting me know how I did by rating our session after you exit. Thanks and have a great day!',
 'Cheating':'Unfortunately, I can’t help you as this appears to be a quiz, test, or assessment, and is a violation of Brainly’s Community Guidelines. Please review our Honor Code prior to requesting tutoring in the future: https://brainly.com/honor-code. Keep in mind that if you attempt to use Brainly to cheat again, further action may be taken on your account.',
