@@ -47,14 +47,14 @@ def time_tracker():
             global waiting_counter
             global working_counter
             if general_counter ==18000: 
+                stopwatch.after(1000,count)
                 display = 'Starting'
                 stopwatch['text']=display
-                stopwatch.after(1000,count)
                 general_counter+=1
-                waiting_counter+=1
+                waiting_counter+=1                                
             else:         
-                change_time_label(stopwatch,general_counter)
                 stopwatch.after(1000,count)
+                change_time_label(stopwatch,general_counter)                
                 general_counter+=1
                 if current_status=='waiting':
                     change_time_label(total_waiting_time,waiting_counter)
@@ -62,6 +62,7 @@ def time_tracker():
                 else: 
                     change_time_label(total_working_time,working_counter)
                     working_counter+=1
+        calculate_minutes(general_counter)
     count()
 
 def StartShift(label): 
@@ -72,6 +73,7 @@ def StartShift(label):
     reset['state']='normal'
     time_tracker()
     label['font'] = 'Verdana 19 bold'
+    
 def ChangeStatus(): 
     global current_status 
     global working_counter
@@ -87,11 +89,18 @@ def ChangeStatus():
         working_time['font']='Verdana 20'
 def EndShift(): 
     global running 
+    global waiting_counter
+    global working_counter
     reset['state']='disabled'
     running = False
     window.quit()
     exit_window = create_exit_window()
     exit_window.mainloop()
+
+def calculate_minutes(counter): 
+    dt = datetime.fromtimestamp(counter)
+    time_in_minutes = dt.hour*60 + dt.minute + (dt.second-1)/60
+    print(str(time_in_minutes), dt.hour, dt.minute, dt.second)
 
 def update_texts(*args):
     dictKey = case_select_var.get()
