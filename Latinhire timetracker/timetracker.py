@@ -136,12 +136,23 @@ def calculate_minutes(counter):
 
 def update_texts(*args):
     dictKey = case_select_var.get()
-    text_field1_value = text1Dict.get(dictKey)
-    text_field1.delete('1.0',END)
-    text_field1.insert(1.0,text_field1_value)
-    text_field2_value = text2Dict.get(dictKey)
-    text_field2.delete('1.0',END)
-    text_field2.insert(1.0,text_field2_value)
+    language_selector = language_var.get()
+    if language_selector==1: 
+        text_field1_value = text1Dict.get(dictKey)
+        text_field1.delete('1.0',END)
+        text_field1.insert(1.0,text_field1_value)
+        text_field2_value = text2Dict.get(dictKey)
+        text_field2.delete('1.0',END)
+        text_field2.insert(1.0,text_field2_value)
+    else: 
+        text_field1_value = text1Dict_spa.get(dictKey)
+        text_field1.delete('1.0',END)
+        text_field1.insert(1.0,text_field1_value)
+        text_field2_value = text2Dict_spa.get(dictKey)
+        text_field2.delete('1.0',END)
+        text_field2.insert(1.0,text_field2_value)
+
+    
 
 def copy_text_to_clipboard(event): 
     text = event.widget.get("1.0","end-1c")
