@@ -62,7 +62,6 @@ def time_tracker():
                 else: 
                     change_time_label(total_working_time,working_counter)
                     working_counter+=1
-        calculate_minutes(general_counter)
     count()
 
 def StartShift(label): 
@@ -91,16 +90,23 @@ def EndShift():
     global running 
     global waiting_counter
     global working_counter
+    global window 
     reset['state']='disabled'
+    stop['state']='disabled'
     running = False
     window.quit()
     exit_window = create_exit_window()
+    working_minutes = str(round(calculate_minutes(working_counter),2))
+    waiting_minutes = str(round(calculate_minutes(waiting_counter),2))
+    print(working_minutes, waiting_minutes)
+    Label(exit_window,text=working_minutes, fg='black', font='Verdana 13').place(x=300,y=50)
+    Label(exit_window,text=waiting_minutes, fg='black', font='Verdana 13').place(x=300,y=100)
     exit_window.mainloop()
 
 def calculate_minutes(counter): 
     dt = datetime.fromtimestamp(counter)
     time_in_minutes = dt.hour*60 + dt.minute + (dt.second-1)/60
-    print(str(time_in_minutes), dt.hour, dt.minute, dt.second)
+    return time_in_minutes
 
 def update_texts(*args):
     dictKey = case_select_var.get()
@@ -116,6 +122,11 @@ def copy_text_to_clipboard(event):
     window.clipboard_clear()
     window.clipboard_append(text)
 
+def close_windows(exit_window): 
+    global window 
+    window.destroy()
+    exit_window.destroy()
+
 def create_exit_window(): 
     exit_window = Tk()
     exit_window.title('')
@@ -126,7 +137,7 @@ def create_exit_window():
     Label(exit_window, text='Total working minutes: ', fg='black', font='Verdana 15 bold').place(x=0,y=100)
     Label(exit_window, text='Would you like to save this results? ', fg='black', font='Verdana 13').place(x=50,y=150)
     Button(exit_window, text='Yes',width=10).place(x=40,y=200)
-    Button(exit_window, text='No',width=10).place(x=250,y=200)
+    Button(exit_window, text='No',width=10,command=lambda :close_windows(exit_window)).place(x=250,y=200)
     return exit_window
 
 
