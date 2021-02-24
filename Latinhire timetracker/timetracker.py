@@ -44,6 +44,20 @@ text2Dict = {
 'Wrong subject':'',
 'Not knowing the answer':''
 }
+text2Dict_spa = {
+'End session':'Sólo quería confirmar que mi explicación fue clara. Si todavía estás ahí por favor déjamelo saber en el chat, de lo contrario, daré por terminada la sesión. Realmente apreciaría si me dejas saber cómo me fue en la sesión calificándome al finalizar la sesión. Gracias y ¡ten un gran día!',
+'Cheating':'Desafortunadamente no puedo ayudarte ya que esto parece ser un quiz, examen o una evaluación y es una violación de la guía comunitaria de Brainly. Por favor revisa nuestro código de honor antes de solicitar una tutoría en el futuro: https://brainly.com/honor-code. Ten en cuenta que si intentas usar Brainly para hacer trampa de nuevo, se tomarán acciones respecto a tu cuenta.',
+'Off-Topic':'Has roto repetidamente nuestra guía comunitara, por lo que voy a terminar y reportar la sesión. Por favor revisa nuestra guía comunitaria aquí  brainly.com/community-guidelines antes de solicitar una tutoría en el futuro.',
+'Offensive Language':'Voy a terminar y reportar la sesión ahora porque has violado repetidamente nuestra guía comunitaria. Por favor revísala en brainly.com/community-guidelines antes de usar las tutorías de Brainly nuevamente.',
+'Disrespectful':'Voy a terminar y reportar la sesión ahora porque has violado repetidamente nuestra guía comunitaria. Por favor revísala en brainly.com/community-guidelines antes de usar las tutorías de Brainly nuevamente.',
+'Sexual Content':'',
+'User Needs Help':'Lamento que te sientas de esa forma. Te recomiendo que hables con un adulto de confianza sobre cómo te sientes. No estás solo, y hay ayuda muy útil en la línea de crisis http://www.crisistextline.org/ y la línea nacional de prevención del suicidio (1-800-273-TALK) con quién tú puedes hablar confidencialmente. Debo terminar nuestra sesión, pero un miembro del equipo de Brainly hará seguimiento contigo más tarde en el día para asegurarse de que estás bien.',
+'Violent Threats':'',
+'Illegal Activiy':'',
+'Wrong subject':'',
+'Not knowing the answer':''
+}
+
 current_status='waiting'
 running=False 
 
