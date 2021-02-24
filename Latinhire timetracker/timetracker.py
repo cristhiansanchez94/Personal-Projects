@@ -7,7 +7,7 @@ working_counter = 18000
 running = False 
 text1Dict = {
 'End session':'If you don’t need further explanation on this question, we can end the session. I’d really appreciate you letting me know how I did by rating our session after you exit. Thanks and have a great day!',
-'Cheating': 'Is this from a graded test, quiz, or timed assessment?',
+'Cheating': 'Before we start, may I ask, is this from a graded test, quiz, or timed assessment?',
 'Off-Topic': 'Please remember that tutoring is for academic questions only. Are you able to stay focused on learning?',
 'Offensive Language': 'Cursing and offensive language is a violation of our Community Guidelines and not allowed on Brainly. Please refrain from using disrespectful language like this or I’ll have to end our session.',
 'Disrespectful':'This sort of disrespectful behavior is a violation of Brainly’s Community Guidelines. If you can’t behave respectfully towards me, I won’t be able to continue our session.',
