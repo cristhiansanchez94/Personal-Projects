@@ -85,11 +85,13 @@ def ChangeStatus():
         current_status = 'waiting'
         waiting_time['font']='Verdana 19 bold'
         working_time['font']='Verdana 20'
-def EndShift(label): 
+def EndShift(): 
     global running 
     reset['state']='disabled'
-    label['text'] = 'Stop'
     running = False
+    window.quit()
+    exit_window = create_exit_window()
+    exit_window.mainloop()
 
 def update_texts(*args):
     dictKey = case_select_var.get()
@@ -105,6 +107,18 @@ def copy_text_to_clipboard(event):
     window.clipboard_clear()
     window.clipboard_append(text)
 
+def create_exit_window(): 
+    exit_window = Tk()
+    exit_window.title('')
+    exit_window.geometry("400x250")
+    exit_window.resizable(0,0)
+    Label(exit_window, text='Shift is over!',fg='black',font='Verdana 20 bold').pack()
+    Label(exit_window, text='Total waiting minutes: ', fg='black', font='Verdana 15 bold').place(x=0,y=50)
+    Label(exit_window, text='Total working minutes: ', fg='black', font='Verdana 15 bold').place(x=0,y=100)
+    Label(exit_window, text='Would you like to save this results? ', fg='black', font='Verdana 13').place(x=50,y=150)
+    Button(exit_window, text='Yes',width=10).place(x=40,y=200)
+    Button(exit_window, text='No',width=10).place(x=250,y=200)
+    return exit_window
 
 
 tt = datetime.fromtimestamp(general_counter)
@@ -118,7 +132,7 @@ window.resizable(0,0)
 #Buttons frame
 frame = Frame(window)
 start = Button(frame, text='Start shift',width=6,command = lambda:StartShift(waiting_time),state='normal')
-stop = Button(frame, text='End shift',width=6, command = lambda:EndShift(working_time),state='disabled')
+stop = Button(frame, text='End shift',width=6, command = EndShift,state='disabled')
 reset = Button(frame, text='Change',width=6, command = ChangeStatus,state='disabled')
 frame.pack(anchor='center',pady=20)
 start.pack(side='left')
@@ -177,6 +191,7 @@ update_texts()
 
 
 window.mainloop()
+
 
 
 
