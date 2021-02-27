@@ -15,10 +15,19 @@ class DataWriter:
         Outputs: 
         -SheetId: The ID of the created sheet'''
         if FolderId ==None: 
-            file = self.drive.CreateFile({'title':SheetTitle,'mimeType':'application/vnd.google-apps.spreadsheet'})
+            file = self.drive.CreateFile({'title':SheetTitle+'.xlsx'})
         else:            
-            file = self.drive.CreateFile({'title':SheetTitle,'mimeType':'application/vnd.google-apps.spreadsheet',
+            file = self.drive.CreateFile({'title':SheetTitle+'.xlsx',
             'parents': [{'kind': 'drive#fileLink','id': FolderId}]})
+        months =['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+        with pd.ExcelWriter('output.xlsx') as writer: 
+            df = pd.DataFrame(columns=['Date','Working minutes','Waiting minutes'])
+            for month in months: 
+                df.to_excel(writer,sheet_name=month,index=False)
+            writer.save()
+            writer.close()
+        file.SetContentFile('output.xlsx')
+        file['title']=SheetTitle
         file.Upload()
         SheetId=file['id']
         return SheetId
