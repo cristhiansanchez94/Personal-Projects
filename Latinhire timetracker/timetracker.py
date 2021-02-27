@@ -62,12 +62,18 @@ current_status='waiting'
 running=False 
 
 def change_time_label(label,counter):
+    '''Function that updates a label timestamp with a counter 
+    Inputs: 
+    -label: The label to be updated 
+    -counter: The counter used to update the label
+    '''
     tt=datetime.fromtimestamp(counter)
     string = tt.strftime("%H:%M:%S")
     display = string
     label['text']=display
 
 def time_tracker(): 
+    '''Function that runs the time_tracker'''
     def count(): 
         if running: 
             global general_counter 
@@ -92,6 +98,7 @@ def time_tracker():
     count()
 
 def StartShift(label): 
+    '''Activation function of the 'Start shift' button'''
     global running 
     running = True 
     start['state']='disabled'
@@ -101,6 +108,7 @@ def StartShift(label):
     label['font'] = 'Verdana 19 bold'
     
 def ChangeStatus(): 
+    '''Activation function of the 'Change' button'''
     global current_status 
     global working_counter
     global waiting_counter
@@ -114,6 +122,7 @@ def ChangeStatus():
         waiting_time['font']='Verdana 19 bold'
         working_time['font']='Verdana 20'
 def EndShift(): 
+    '''Activation function of the 'End Shift' button'''
     global running 
     global waiting_counter
     global working_counter
@@ -130,11 +139,20 @@ def EndShift():
     exit_window.mainloop()
 
 def calculate_minutes(counter): 
+    '''Function that calculates the total amount of time, in minutes, from the counter
+    Inputs: 
+     -counter: counter to be used to calculate the minutes of the timestamp
+    Outputs: 
+     -time_in_minutes: the total amount of minutes of the timestamp represented by counter
+    '''
     dt = datetime.fromtimestamp(counter)
     time_in_minutes = dt.hour*60 + dt.minute + (dt.second-1)/60
     return time_in_minutes
 
 def update_texts(*args):
+    '''
+    Function that updates the text boxes according to the selected options in the language and case selectors
+    '''
     dictKey = case_select_var.get()
     language_selector = language_var.get()
     if language_selector==1: 
@@ -155,16 +173,22 @@ def update_texts(*args):
     
 
 def copy_text_to_clipboard(event): 
+    '''Function to copy the clicked text box to the clipboard'''
     text = event.widget.get("1.0","end-1c")
     window.clipboard_clear()
     window.clipboard_append(text)
 
 def close_windows(exit_window): 
+    '''Function to close all open windows'''
     global window 
     window.destroy()
     exit_window.destroy()
 
 def create_exit_window(): 
+    '''Function that creates the window once the 'End Shift' button is activated
+    Outputs: 
+     - exit_window: The object of the created window
+    '''
     exit_window = Tk()
     exit_window.title('')
     exit_window.geometry("400x250")
