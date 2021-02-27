@@ -33,3 +33,18 @@ class DataWriter:
         folder.Upload()
         FolderId = folder['id']
         return FolderId
+    def searchObjects(self,ObjectsList): 
+        '''
+        Function that searches through google drive the id's of the objects in 
+        ObjectsList
+        Inputs: 
+         - ObjectsList: List of objects, whose id's are going to be searched
+        Outputs: 
+         - IdsDict: Dictionary with the id's of the objects in ObjectsList
+        '''
+        fileList = self.drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
+        IdsDict = {Object:None for Object in ObjectsList}
+        for file in fileList: 
+            if file['title'] in IdsDict.keys(): 
+                IdsDict[file['title']] = file['id']
+        return IdsDict
