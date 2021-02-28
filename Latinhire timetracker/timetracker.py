@@ -1,5 +1,5 @@
 from tkinter import * 
-from datetime import datetime 
+from datetime import datetime, date 
 import time 
 import DataWriter
 
@@ -199,11 +199,35 @@ def create_exit_window():
     Label(exit_window, text='Total waiting minutes: ', fg='black', font='Verdana 15 bold').place(x=0,y=50)
     Label(exit_window, text='Total working minutes: ', fg='black', font='Verdana 15 bold').place(x=0,y=100)
     Label(exit_window, text='Would you like to save this results? ', fg='black', font='Verdana 13').place(x=50,y=150)
-    Button(exit_window, text='Yes',width=10).place(x=40,y=200)
+    Button(exit_window, text='Yes',width=10,command=create_saving_window).place(x=40,y=200)
     Button(exit_window, text='No',width=10,command=lambda :close_windows(exit_window)).place(x=250,y=200)
     return exit_window
 
+def create_saving_window(): 
+    '''Function that creates the window once the 'Yes' button is activated at the exit_window
+    Outputs: 
+     - saving_window: The object of the created window
+    '''
+    saving_window = Tk()
+    saving_window.title('')
+    saving_window.geometry("400x250")
+    saving_window.resizable(0,0)
+    Message(saving_window, text='Save in google drive: select the desired location(use the same file name everytime)',fg='black',font='Verdana 10 ',width=300).pack()
+    Label(saving_window, text='Folder name: ', fg='black', font='Verdana 15 bold').place(x=0,y=50)
+    Label(saving_window, text='File name: ', fg='black', font='Verdana 15 bold').place(x=0,y=100)
+    folder_name_text_field = Text(saving_window,height=1,borderwidth=0,width=20)
+    folder_name_text_field.place(x=155,y=50)
+    folder_name_text_field.insert(1.0,'')
+    file_name_text_field = Text(saving_window,height=1,borderwidth=0,width=30)
+    file_name = 'Latinhire time tracker ' + str(date.today().year)
+    file_name_text_field.insert(1.0,file_name)
+    file_name_text_field.place(x=125,y=100)
+    #Label(saving_window, text='Would you like to save this results? ', fg='black', font='Verdana 13').place(x=50,y=150)
+    Button(saving_window, text='Save',width=20).place(x=100,y=150)
+    
+    return saving_window
 
+#Section of the main window 
 tt = datetime.fromtimestamp(general_counter)
 string = tt.strftime("%H:%M:%S")
 display = string 
