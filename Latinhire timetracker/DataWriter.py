@@ -9,6 +9,7 @@ class DataWriter:
         self.gauth = GoogleAuth()
         self.gauth.LocalWebserverAuth()
         self.drive = GoogleDrive(self.gauth)
+
     def createSheet(self,SheetTitle,FolderId=None):
         '''Function that creates a google sheets at the specified folder. If no folder 
         is specified, the sheet is created at the root
@@ -45,9 +46,10 @@ class DataWriter:
         folder.Upload()
         FolderId = folder['id']
         return FolderId
+
     def searchObject(self,searchedObjectTitle, parent_folder_id):
-        '''Function that searches for an object over the entire tree of the google drive. It uses a recursive 
-        algorithm. 
+        '''Function that searches for an object over the entire tree of the google drive. 
+        It uses a recursive algorithm. 
         Inputs: 
          -searchedObjectTitle: The title of the searched object 
          - parent_folder_id: The id of the current folder where the algorithm is searching for the file
@@ -62,19 +64,7 @@ class DataWriter:
             if file['mimeType']=='application/vnd.google-apps.folder': 
                 foundId = self.searchObject(searchedObjectTitle,file['id'])
             return foundId 
-    def searchObjects(self,ObjectsList): 
-        '''
-        Function that searches through google drive the id's of the objects in 
-        ObjectsList
-        Inputs: 
-         - ObjectsList: List of objects, whose id's are going to be searched
-        Outputs: 
-         - IdsDict: Dictionary with the id's of the objects in ObjectsList
-        '''        
-        IdsDict = {Object:None for Object in ObjectsList}
-        for Object in IdsDict.keys(): 
-            IdsDict[Object] = self.searchObject(Object,'root')
-        return IdsDict
+
     def writeData(self,SheetTitle, FolderTitle,waiting_minutes, working_minutes): 
         '''Function that writes the data to the specified google drive. Whenever 
         file doesn't exist, it creates it depending on the folder title. 
@@ -84,13 +74,12 @@ class DataWriter:
          - waiting_minutes: The waiting minutes value to be safed
          - working_minutes: The working minutes value to be safed
         '''
-        IdsDict = self.searchObjects([SheetTitle, FolderTitle])
-        SheetId = IdsDict.get(SheetTitle)
-        FolderId = IdsDict.get(FolderTitle)
+        SheetId = self.searchObject(SheetTitle,'root')
         if SheetId is None: 
             if FolderTitle == '':
                 SheetId = self.createSheet(SheetTitle)
             else: 
+                FolderId = self.searchObject(FolderTitle,'root')
                 if FolderId is None:
                     FolderId = self.createFolder(FolderTitle)
                 SheetId = self.createSheet(SheetTitle, FolderId = FolderId)
