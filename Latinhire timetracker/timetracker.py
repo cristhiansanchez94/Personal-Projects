@@ -180,18 +180,19 @@ def copy_text_to_clipboard(event):
     window.clipboard_clear()
     window.clipboard_append(text)
 
-def close_windows(exit_window): 
-    '''Function to close all open windows'''
+def close_windows(): 
+    '''Function to close all open windows from the exit window'''
     global window 
     window.destroy()
-    exit_window.destroy()
+    #exit_window.destroy()
 
 def create_exit_window(): 
     '''Function that creates the window once the 'End Shift' button is activated
     Outputs: 
      - exit_window: The object of the created window
     '''
-    exit_window = Tk()
+    global window
+    exit_window = Toplevel(window)
     exit_window.title('')
     exit_window.geometry("400x250")
     exit_window.resizable(0,0)
@@ -200,7 +201,7 @@ def create_exit_window():
     Label(exit_window, text='Total working minutes: ', fg='black', font='Verdana 15 bold').place(x=0,y=100)
     Label(exit_window, text='Would you like to save this results? ', fg='black', font='Verdana 13').place(x=50,y=150)
     Button(exit_window, text='Yes',width=10,command=create_saving_window).place(x=40,y=200)
-    Button(exit_window, text='No',width=10,command=lambda :close_windows(exit_window)).place(x=250,y=200)
+    Button(exit_window, text='No',width=10,command=close_windows).place(x=250,y=200)
     return exit_window
 
 def create_saving_window(): 
@@ -208,7 +209,8 @@ def create_saving_window():
     Outputs: 
      - saving_window: The object of the created window
     '''
-    saving_window = Tk()
+    global window
+    saving_window = Toplevel(window)
     saving_window.title('')
     saving_window.geometry("400x250")
     saving_window.resizable(0,0)
@@ -222,9 +224,7 @@ def create_saving_window():
     file_name = 'Latinhire time tracker ' + str(date.today().year)
     file_name_text_field.insert(1.0,file_name)
     file_name_text_field.place(x=125,y=100)
-    #Label(saving_window, text='Would you like to save this results? ', fg='black', font='Verdana 13').place(x=50,y=150)
-    Button(saving_window, text='Save',width=20).place(x=100,y=150)
-    
+    Button(saving_window, text='Save',width=20,command = close_windows).place(x=100,y=150)    
     return saving_window
 
 #Section of the main window 
