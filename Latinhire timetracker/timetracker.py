@@ -1,6 +1,8 @@
 from tkinter import * 
 from datetime import datetime 
 import time 
+import DataWriter
+
 general_counter = 18000
 waiting_counter = 18000
 working_counter = 18000
