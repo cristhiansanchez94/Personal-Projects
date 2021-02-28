@@ -98,4 +98,6 @@ class DataWriter:
             writer.close()
         DataSheet.SetContentFile('output.xlsx')
         DataSheet.Upload()
+        os.remove('output.xlsx')
+        os.remove('temp.xlsx')
     
