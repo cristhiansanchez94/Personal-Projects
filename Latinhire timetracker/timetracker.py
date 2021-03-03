@@ -163,8 +163,25 @@ def write_data_to_gdrive(folder_text_field,file_text_field):
     SheetTitle= file_text_field.get("1.0","end-1c")
     working_minutes = str(max(round(calculate_minutes(working_counter),2),0))
     waiting_minutes = str(max(round(calculate_minutes(waiting_counter),2),0))
-    DataWriter.DataWriter().writeData(SheetTitle,FolderTitle,waiting_minutes,working_minutes)
-    print('Done')
+    try: 
+        #DataWriter.DataWriter().writeData(SheetTitle,FolderTitle,waiting_minutes,working_minutes)
+        #post_message('Data saved successfully')
+        print(1/0)
+    except: 
+        post_message('There has been an error while saving',error=True)
+
+def post_message(message,error=False): 
+    global window 
+    message_window = Toplevel(window)
+    message_window.title('')
+    message_window.geometry("350x100")
+    message_window.resizable(0,0)
+    Label(message_window, text=message, fg='black', font='Verdana 12').place(x=40,y=20)
+    if error: 
+        Button(message_window, text='Ok', width=20, command=message_window.destroy).place(x=70,y=60)
+    else: 
+        Button(message_window, text='Ok', width=20, command=close_windows).place(x=70,y=60)
+
 
 def update_texts(*args):
     '''
