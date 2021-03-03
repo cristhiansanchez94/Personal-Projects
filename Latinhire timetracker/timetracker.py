@@ -161,8 +161,8 @@ def write_data_to_gdrive(folder_text_field,file_text_field):
     global working_counter
     FolderTitle=folder_text_field.get("1.0","end-1c")
     SheetTitle= file_text_field.get("1.0","end-1c")
-    working_minutes = str(max(round(calculate_minutes(working_counter),2),0)).replace(".",",")
-    waiting_minutes = str(max(round(calculate_minutes(waiting_counter),2),0)).replace(".",",")
+    working_minutes = max(round(calculate_minutes(working_counter),2),0)
+    waiting_minutes = max(round(calculate_minutes(waiting_counter),2),0)
     try: 
         DataWriter.DataWriter().writeData(SheetTitle,FolderTitle,waiting_minutes,working_minutes)
         post_message('Data saved successfully')
