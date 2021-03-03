@@ -151,6 +151,15 @@ def calculate_minutes(counter):
     time_in_minutes = dt.hour*60 + dt.minute + (dt.second-1)/60
     return time_in_minutes
 
+def write_data_to_gdrive(folder_text_field,file_text_field): 
+    global waiting_counter
+    global working_counter
+    FolderTitle=folder_text_field.get("1.0","end-1c")
+    SheetTitle= file_text_field.get("1.0","end-1c")
+    working_minutes = str(max(round(calculate_minutes(working_counter),2),0))
+    waiting_minutes = str(max(round(calculate_minutes(waiting_counter),2),0))
+    DataWriter.DataWriter().writeData(SheetTitle,FolderTitle,waiting_minutes,working_minutes)
+
 def update_texts(*args):
     '''
     Function that updates the text boxes according to the selected options in the language and case selectors
@@ -184,7 +193,6 @@ def close_windows():
     '''Function to close all open windows from the exit window'''
     global window 
     window.destroy()
-    #exit_window.destroy()
 
 def create_exit_window(): 
     '''Function that creates the window once the 'End Shift' button is activated
@@ -224,8 +232,7 @@ def create_saving_window():
     file_name = 'Latinhire time tracker ' + str(date.today().year)
     file_name_text_field.insert(1.0,file_name)
     file_name_text_field.place(x=125,y=100)
-    Button(saving_window, text='Save',width=20,command = close_windows).place(x=100,y=150)    
-    return saving_window
+    Button(saving_window, text='Save',width=20,command = lambda : write_data_to_gdrive(folder_name_text_field,file_name_text_field)).place(x=100,y=150)    
 
 #Section of the main window 
 tt = datetime.fromtimestamp(general_counter)
