@@ -170,7 +170,12 @@ def write_data_to_gdrive(folder_text_field,file_text_field):
     except: 
         post_message('There has been an error while saving',error=True)
 
-def post_message(message,error=False): 
+def post_message(message,error=False):
+    '''Function used to create a window with a message
+    Inputs: 
+     - message: The message to be posted 
+     - error: Indicator if the message is an error o a simple message 
+    ''' 
     global window 
     message_window = Toplevel(window)
     message_window.title('')
