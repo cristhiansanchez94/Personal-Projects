@@ -155,7 +155,7 @@ def write_data_to_gdrive(folder_text_field,file_text_field):
     '''Function used to save the results to google drive
     Inputs: 
      - folder_text_field: The text field that contains the folder name 
-     - file_text_field: The text fiedl that contains the file name
+     - file_text_field: The text field that contains the file name
     '''
     global waiting_counter
     global working_counter
