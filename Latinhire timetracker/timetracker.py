@@ -134,8 +134,8 @@ def EndShift():
     running = False
     window.quit()
     exit_window = create_exit_window()
-    working_minutes = str(max(round(calculate_minutes(working_counter),2),0)).replace(".",",")
-    waiting_minutes = str(max(round(calculate_minutes(waiting_counter),2),0)).replace(".",",")
+    working_minutes = str(max(round(calculate_minutes(working_counter),2),0))
+    waiting_minutes = str(max(round(calculate_minutes(waiting_counter),2),0))
     Label(exit_window,text=waiting_minutes, fg='black', font='Verdana 13').place(x=300,y=50)
     Label(exit_window,text=working_minutes, fg='black', font='Verdana 13').place(x=300,y=100)
     exit_window.mainloop()
@@ -161,12 +161,11 @@ def write_data_to_gdrive(folder_text_field,file_text_field):
     global working_counter
     FolderTitle=folder_text_field.get("1.0","end-1c")
     SheetTitle= file_text_field.get("1.0","end-1c")
-    working_minutes = str(max(round(calculate_minutes(working_counter),2),0))
-    waiting_minutes = str(max(round(calculate_minutes(waiting_counter),2),0))
+    working_minutes = str(max(round(calculate_minutes(working_counter),2),0)).replace(".",",")
+    waiting_minutes = str(max(round(calculate_minutes(waiting_counter),2),0)).replace(".",",")
     try: 
-        #DataWriter.DataWriter().writeData(SheetTitle,FolderTitle,waiting_minutes,working_minutes)
-        #post_message('Data saved successfully')
-        print(1/0)
+        DataWriter.DataWriter().writeData(SheetTitle,FolderTitle,waiting_minutes,working_minutes)
+        post_message('Data saved successfully')
     except: 
         post_message('There has been an error while saving',error=True)
 
