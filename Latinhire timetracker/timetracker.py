@@ -6,6 +6,7 @@ import DataWriter
 general_counter = 18000
 waiting_counter = 18000
 working_counter = 18000
+current_session_counter = 18000
 running = False 
 text1Dict = {
 'End session':'If you don’t need further explanation on this question, we can end the session. I’d really appreciate you letting me know how I did by rating our session after you exit. Thanks and have a great day!',
@@ -114,6 +115,7 @@ def ChangeStatus():
     global current_status 
     global working_counter
     global waiting_counter
+    global current_session_counter
     if current_status =='waiting': 
         current_status = 'working'
         working_time['font']='Verdana 19 bold'
@@ -121,6 +123,7 @@ def ChangeStatus():
         working_counter+=1
     else: 
         current_status = 'waiting'
+        current_session_counter = 18000
         waiting_time['font']='Verdana 19 bold'
         working_time['font']='Verdana 20'
 def EndShift(): 
@@ -287,6 +290,10 @@ waiting_time = Label(window, text='Waiting time',fg='black',font='Verdana 20')
 waiting_time.place(x=0,y=150)
 working_time = Label(window, text='Working time',fg='black',font='Verdana 20')
 working_time.place(x=550,y=150)
+current_session = Label(window, text='Current session',fg='black',font='Verdana 20')
+current_session.place(x=250,y=150)
+current_session_time = Label(window, text=string, fg='black', font='Verdana 20')
+current_session_time.place(x=250,y=200)
 total_waiting_time = Label(window, text=string, fg='black', font='Verdana 20')
 total_waiting_time.place(x=0,y=200)
 total_working_time = Label(window, text=string, fg='black', font='Verdana 20')
