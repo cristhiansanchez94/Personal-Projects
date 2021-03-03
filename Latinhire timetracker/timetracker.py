@@ -82,6 +82,7 @@ def time_tracker():
             global general_counter 
             global waiting_counter
             global working_counter
+            global current_session_counter
             if general_counter ==18000: 
                 stopwatch.after(1000,count)
                 display = 'Starting'
@@ -98,6 +99,8 @@ def time_tracker():
                 else: 
                     change_time_label(total_working_time,working_counter)
                     working_counter+=1
+                    change_time_label(current_session_time,current_session_counter)
+                    current_session_counter+=1
     count()
 
 def StartShift(label): 
@@ -121,9 +124,11 @@ def ChangeStatus():
         working_time['font']='Verdana 19 bold'
         waiting_time['font']='Verdana 20'
         working_counter+=1
+        current_session_counter+=1
     else: 
         current_status = 'waiting'
         current_session_counter = 18000
+        change_time_label(current_session_time,current_session_counter)
         waiting_time['font']='Verdana 19 bold'
         working_time['font']='Verdana 20'
 def EndShift(): 
