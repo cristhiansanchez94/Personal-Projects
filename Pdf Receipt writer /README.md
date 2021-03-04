@@ -1,0 +1,1 @@
+This folder contains all necessary files for the pdf receipt writer to work 
