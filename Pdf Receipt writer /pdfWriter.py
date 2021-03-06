@@ -32,7 +32,7 @@ class PDF(FPDF):
     def set_signature(self):
         self.set_xy(30,205)
         self.image("Firma.png",w=75,h=25,link='',type='')
-    def set_text_amount(self,text):
+    def set_amount_text(self,text):
         self.set_font('Times','B',11)
         self.set_xy(0,160)
         self.cell(w=210,h=40,align='C',txt=text)
@@ -47,17 +47,16 @@ class PDF(FPDF):
         self.multi_cell(0,5,text2,align='L')
         text3 ='TOTAL A PAGAR'
         self.set_xy(10,135)
-        self.cell(w=210,h=40,align='C',txt=text3)
-        ##Monto en texto         
+        self.cell(w=210,h=40,align='C',txt=text3)       
 
         self.set_xy(30,180)
-        text5='Cordialmente,'
-        self.cell(w=210,h=40,txt=text5)
+        text4='Cordialmente,'
+        self.cell(w=210,h=40,txt=text4)
 
         self.set_xy(30,230)
         #self.cell(w=210,h=40,txt='AQUI')
-        text6='CRISTHIAN CAMILO SÁNCHEZ FINO\nC.C  1.018.467.343 de Bogotá\nNIT 700.043.841-1\nBancolombia Cuenta Ahorros 205-257804-29'
-        self.multi_cell(0,5,txt=text6)
+        text5='CRISTHIAN CAMILO SÁNCHEZ FINO\nC.C  1.018.467.343 de Bogotá\nNIT 700.043.841-1\nBancolombia Cuenta Ahorros 205-257804-29'
+        self.multi_cell(0,5,txt=text5)
 
 
     def set_document_layout(self): 
@@ -68,7 +67,7 @@ class PDF(FPDF):
         self.set_recipient_info()
         self.set_body()
         self.set_signature()
-        self.set_text_amount('SON: DOSCIENTOS CUARENTA MIL PESOS  MCTE**')
+        self.set_amount_text('SON: DOSCIENTOS CUARENTA MIL PESOS  MCTE**')
 
 pdf = PDF()
 pdf.add_page()
