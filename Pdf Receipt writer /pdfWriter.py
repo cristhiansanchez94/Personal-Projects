@@ -28,7 +28,11 @@ class PDF(FPDF):
         text='Riesgo de Fractura S.A-NIT 830.027.158-3 \n    Dirección: Carrera 20B  No 74-46 \n  Teléfono: 7466400'
         self.multi_cell(0,5,text,align='C')
         self.set_font('Times','',11)
-
+    
+    def set_signature(self):
+        self.set_xy(30,205)
+        self.image("Firma.png",w=75,h=25,link='',type='')
+        
     def set_body(self): 
         self.set_xy(10,100)
         text1 ='DEBE A \n \n CRISTHIAN CAMILO SÁNCHEZ FINO'
@@ -37,12 +41,24 @@ class PDF(FPDF):
         self.set_xy(30,130)
         self.multi_cell(0,5,text2,align='L')
         text3 ='TOTAL A PAGAR'
+        ##Monto en texto 
         self.set_xy(10,135)
         self.cell(w=210,h=40,align='C',txt=text3)
         self.set_font('Times','B',11)
         text4='SON: DOSCIENTOS CUARENTA MIL PESOS  MCTE**'
         self.set_xy(0,160)
         self.cell(w=210,h=40,align='C',txt=text4)
+        self.set_font('Times','',11)
+
+        self.set_xy(30,180)
+        text5='Cordialmente,'
+        self.cell(w=210,h=40,txt=text5)
+
+        self.set_xy(30,230)
+        #self.cell(w=210,h=40,txt='AQUI')
+        text6='CRISTHIAN CAMILO SÁNCHEZ FINO\nC.C  1.018.467.343 de Bogotá\nNIT 700.043.841-1\nBancolombia Cuenta Ahorros 205-257804-29'
+        self.multi_cell(0,5,txt=text6)
+
 
     def set_document_layout(self): 
         self.set_font('Times','',11)
@@ -51,6 +67,7 @@ class PDF(FPDF):
         self.set_document_number('0004')
         self.set_recipient_info()
         self.set_body()
+        self.set_signature()
 
 pdf = PDF()
 pdf.add_page()
