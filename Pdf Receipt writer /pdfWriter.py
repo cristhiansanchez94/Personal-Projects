@@ -56,6 +56,6 @@ pdf = PDF()
 pdf.add_page()
 #pdf_w = 210
 #pdf_h = 297
-#pdf.draw_border()
+pdf.draw_border()
 pdf.set_document_layout()
 pdf.output('prueba.pdf','F')
