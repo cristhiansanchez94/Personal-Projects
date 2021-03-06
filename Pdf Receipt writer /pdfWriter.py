@@ -21,12 +21,19 @@ class PDF(FPDF):
         self.set_xy(128.0,20.0)
         text = 'CUENTA DE COBRO No. {doc_num}'.format(doc_num=doc_num)
         self.cell(w=210.0,h=40.0, txt=text, border=0)
+    def set_recipient_info(self): 
+        self.set_font('Times','B',11)
+        #self.set_xy(90,100)
+        self.set_xy(10,75)
+        text='Riesgo de Fractura S.A NIT 830.027.158-3 \n    Dirección: Carrera 20B  No 74-46 \n  Teléfono: 7466400'
+        self.multi_cell(0,5,text,align='C')#(w=200.0,h=40.0,txt=text,border=0)
 
     def set_document_layout(self): 
         self.set_font('Times','',11)
         self.set_text_color(0,0,0)
         self.set_document_date()
         self.set_document_number('0004')
+        self.set_recipient_info()
 
 pdf = PDF()
 pdf.add_page()
