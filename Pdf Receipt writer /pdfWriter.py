@@ -32,6 +32,11 @@ class PDF(FPDF):
     def set_signature(self):
         self.set_xy(30,205)
         self.image("Firma.png",w=75,h=25,link='',type='')
+    def set_text_amount(self,text):
+        self.set_font('Times','B',11)
+        self.set_xy(0,160)
+        self.cell(w=210,h=40,align='C',txt=text)
+        self.set_font('Times','',11)
         
     def set_body(self): 
         self.set_xy(10,100)
@@ -41,14 +46,9 @@ class PDF(FPDF):
         self.set_xy(30,130)
         self.multi_cell(0,5,text2,align='L')
         text3 ='TOTAL A PAGAR'
-        ##Monto en texto 
         self.set_xy(10,135)
         self.cell(w=210,h=40,align='C',txt=text3)
-        self.set_font('Times','B',11)
-        text4='SON: DOSCIENTOS CUARENTA MIL PESOS  MCTE**'
-        self.set_xy(0,160)
-        self.cell(w=210,h=40,align='C',txt=text4)
-        self.set_font('Times','',11)
+        ##Monto en texto         
 
         self.set_xy(30,180)
         text5='Cordialmente,'
@@ -68,6 +68,7 @@ class PDF(FPDF):
         self.set_recipient_info()
         self.set_body()
         self.set_signature()
+        self.set_text_amount('SON: DOSCIENTOS CUARENTA MIL PESOS  MCTE**')
 
 pdf = PDF()
 pdf.add_page()
