@@ -12,7 +12,29 @@ def create_pdf():
     pdf.set_document_layout()
     pdf.set_document_values(doc_num,amount_text,amount_value)
     pdf.output('output.pdf','F')
+    post_message('Pdf created successfully')
 
+def close_windows(): 
+    '''Function to close all open windows from the exit window'''
+    global mainWindow 
+    mainWindow.destroy()
+    
+def post_message(message,error=False):
+    '''Function used to create a window with a message
+    Inputs: 
+     - message: The message to be posted 
+     - error: Indicator if the message is an error o a simple message 
+    ''' 
+    global mainWindow 
+    message_window = Toplevel(mainWindow)
+    message_window.title('')
+    message_window.geometry("350x100")
+    message_window.resizable(0,0)
+    Label(message_window, text=message, fg='black', font='Verdana 12').place(x=40,y=20)
+    if error: 
+        Button(message_window, text='Ok', width=20, command=message_window.destroy).place(x=70,y=60)
+    else: 
+        Button(message_window, text='Ok', width=20, command=close_windows).place(x=70,y=60)
 
 #Window details
 mainWindow = Tk()
