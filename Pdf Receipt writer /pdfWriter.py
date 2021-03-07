@@ -82,15 +82,14 @@ class PDF(FPDF):
         self.set_body()
         self.set_signature()
 
-    def set_document_values(self):
-        self.set_document_number('0004')
-        self.set_amount_text('SON: DOSCIENTOS CUARENTA MIL PESOS  MCTE**')
-        self.set_amount_values('240.000')
+    def set_document_values(self,doc_num,amount_text,amount_value):
+        self.set_document_number(doc_num)
+        text = 'SON: {} PESOS MCTE**'.format(amount_text)
+        self.set_amount_text(text)
+        self.set_amount_values(amount_value)
 pdf = PDF()
 pdf.add_page()
-#pdf_w = 210
-#pdf_h = 297
 pdf.draw_border()
 pdf.set_document_layout()
-pdf.set_document_values()
+pdf.set_document_values('0135','AVIONES','130.000')
 pdf.output('prueba.pdf','F')
