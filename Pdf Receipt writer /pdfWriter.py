@@ -72,17 +72,19 @@ class PDF(FPDF):
         self.set_font('Times','',11)
         self.set_text_color(0,0,0)
         self.set_document_date()
-        self.set_document_number('0004')
         self.set_recipient_info()
         self.set_body()
         self.set_signature()
+
+    def set_document_values(self):
+        self.set_document_number('0004')
         self.set_amount_text('SON: DOSCIENTOS CUARENTA MIL PESOS  MCTE**')
         self.set_amount_values('240.000')
-
 pdf = PDF()
 pdf.add_page()
 #pdf_w = 210
 #pdf_h = 297
 pdf.draw_border()
 pdf.set_document_layout()
+pdf.set_document_values()
 pdf.output('prueba.pdf','F')
