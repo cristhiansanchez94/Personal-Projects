@@ -37,6 +37,11 @@ class PDF(FPDF):
         self.set_xy(0,160)
         self.cell(w=210,h=40,align='C',txt=text)
         self.set_font('Times','',11)
+    def draw_lines(self):
+        self.set_line_width(0.0)
+        self.dashed_line(160,150,190,150)
+        self.line(160,157,190,157)
+        self.line(160,158,190,158)
 
     def set_amount_values(self,text): 
         self.set_xy(165,113)
@@ -44,6 +49,7 @@ class PDF(FPDF):
         self.cell(w=210,h=40,txt=amount)
         self.set_xy(165,135)
         self.cell(w=210,h=40,txt=amount)
+        self.draw_lines()
         
         
     def set_body(self): 
