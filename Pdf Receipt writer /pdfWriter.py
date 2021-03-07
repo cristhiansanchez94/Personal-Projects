@@ -37,25 +37,34 @@ class PDF(FPDF):
         self.set_xy(0,160)
         self.cell(w=210,h=40,align='C',txt=text)
         self.set_font('Times','',11)
+
+    def set_amount_values(self,text): 
+        self.set_xy(165,113)
+        amount='$ {}'.format(text)
+        self.cell(w=210,h=40,txt=amount)
+        self.set_xy(165,135)
+        self.cell(w=210,h=40,txt=amount)
+        
         
     def set_body(self): 
         self.set_xy(10,100)
         text1 ='DEBE A \n \n CRISTHIAN CAMILO SÁNCHEZ FINO'
         self.multi_cell(0,7,text1,align='C')
+
         text2 ='Distribución resultados participación U.T PROSUEÑO COLOMBIA \nsegún contrato por suministro equipos programa de atención integral\npacientes con apnea de sueño EPS-Sanitas'
         self.set_xy(30,130)
         self.multi_cell(0,5,text2,align='L')
+
         text3 ='TOTAL A PAGAR'
         self.set_xy(10,135)
         self.cell(w=210,h=40,align='C',txt=text3)       
 
-        self.set_xy(30,180)
         text4='Cordialmente,'
+        self.set_xy(30,180)        
         self.cell(w=210,h=40,txt=text4)
 
-        self.set_xy(30,230)
-        #self.cell(w=210,h=40,txt='AQUI')
         text5='CRISTHIAN CAMILO SÁNCHEZ FINO\nC.C  1.018.467.343 de Bogotá\nNIT 700.043.841-1\nBancolombia Cuenta Ahorros 205-257804-29'
+        self.set_xy(30,230)        
         self.multi_cell(0,5,txt=text5)
 
 
@@ -68,6 +77,7 @@ class PDF(FPDF):
         self.set_body()
         self.set_signature()
         self.set_amount_text('SON: DOSCIENTOS CUARENTA MIL PESOS  MCTE**')
+        self.set_amount_values('240.000')
 
 pdf = PDF()
 pdf.add_page()
