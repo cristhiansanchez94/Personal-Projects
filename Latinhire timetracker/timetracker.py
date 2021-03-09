@@ -2,6 +2,10 @@ from tkinter import *
 from datetime import datetime, date 
 import time 
 import DataWriter
+import os 
+
+os.chdir('/home/gdot/Documentos/Personal-Projects/Latinhire timetracker')
+
 
 general_counter = 18000
 waiting_counter = 18000
