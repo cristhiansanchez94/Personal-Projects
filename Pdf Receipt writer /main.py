@@ -1,5 +1,7 @@
 from tkinter import *
 import pdfWriter 
+import os 
+os.chdir('/home/gdot/Documentos/Personal-Projects/Pdf Receipt writer ')
 
 def create_pdf():
     '''Function that creates the receipt's pdf'''
@@ -48,6 +50,7 @@ Label(mainWindow, text='Monto($):',fg='black',font='Verdana 10').place(x=25,y=10
 Label(mainWindow, text='Monto(texto):',fg='black',font='Verdana 10').place(x=25,y=150)
 Label(mainWindow, text='Consecutivo:',fg='black',font='Verdana 10').place(x=25,y=200)
 Label(mainWindow, text='Ruta:',fg='black',font='Verdana 10').place(x=25,y=250)
+
 #Text fields 
 quantity_num_text_field = Text(mainWindow,height=1,width=20)
 quantity_num_text_field.place(x=150,y=100)
