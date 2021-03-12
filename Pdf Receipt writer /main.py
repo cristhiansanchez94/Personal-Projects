@@ -24,8 +24,13 @@ def create_pdf():
     months = ['Enero','Febrero','Marzo','Abril','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
     current_month =date.today().month -2
     current_year = date.today().year
-    pdfTitle = 'Cuenta de Cobro UT {} {}- Cristhian Sánchez '.format(months[current_month],current_year)+'.pdf'
-    pdf.output(pdfTitle,'F')
+    pdfTitle = 'Cuenta de Cobro UT {} {}- Cristhian Sánchez'.format(months[current_month],current_year)+'.pdf'
+    try: 
+        pdf.output(pdfTitle,'F')
+        create_check_window()
+    except: 
+        post_message('Error while creating the pdf',error=True)
+    
 
 def get_recipients_emails(filepath):
     '''Function used to get the recipients emails from the filepath'''
@@ -37,11 +42,13 @@ def get_recipients_emails(filepath):
     return email_recipients, bcc_recipients
 
 def send_email(): 
+    '''Function that sends the email with a default message and the receipt attached to it'''
     global pdfTitle 
     email_recipients,bcc_recipients = get_recipients_emails(email_recipients_directory)
-    attachment_location = current_directory+'/'+pdfTitle
+    attachment_location = pdfTitle
     try: 
-        emailSender.EmailSender().send_email(email_recipients,'Cuenta de Cobro UT', email_credentials_path,bcc_recipients,attachment_location=attachment_location)
+        emailSender.EmailSender().send_email(email_recipients,'Cuenta de Cobro UT - Cristhian Sánchez', email_credentials_path,bcc_recipients,attachment_location=attachment_location)
+        os.remove(pdfTitle)
         post_message('Email sent successfully')
     except: 
         post_message('Error sending the email',error=True)
@@ -50,7 +57,18 @@ def close_windows():
     '''Function to close all open windows from the exit window'''
     global mainWindow 
     mainWindow.destroy()
-    
+
+def create_check_window():
+    '''Function used to create a window with the message to check the created pdf''' 
+    global mainWindow 
+    check_window = Toplevel(mainWindow)
+    check_window.title('')
+    check_window.geometry("450x100")
+    check_window.resizable(0,0)
+    Label(check_window, text='Pdf created successfully. Please check the file', fg='black', font='Verdana 12').place(x=40,y=20)
+    Button(check_window, text='Send', width=10, command=send_email).place(x=70,y=60)
+    Button(check_window, text='Close', width=10, command=check_window.destroy).place(x=270,y=60)
+
 def post_message(message,error=False):
     '''Function used to create a window with a message
     Inputs: 
