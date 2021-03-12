@@ -1,8 +1,7 @@
 import smtplib 
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase 
-from email import encoders 
+from email.mime.application import MIMEApplication
 import os.path
 class EmailSender(): 
     def send_email(self, email_recipients, email_subject,email_credentials_path, bcc_recipients=[], attachment_location=''): 
@@ -35,10 +34,8 @@ Cristhian Sánchez'''
         if attachment_location !='': 
             filename = os.path.basename(attachment_location)
             attachment = open(attachment_location,'rb')
-            part = MIMEBase('application','octet-stream')
-            part.set_payload(attachment.read())
-            encoders.encode_base64(part)
-            part.add_header('Content-Disposition','attachment; filename= %s' %filename)
+            part = MIMEApplication(attachment.read())
+            part.add_header('Content-Disposition','attachment', filename= filename)
             msg.attach(part)
             try: 
                 server = smtplib.SMTP('smtp.gmail.com',587)
@@ -48,7 +45,7 @@ Cristhian Sánchez'''
                 text = msg.as_string()
                 server.sendmail(email_sender,(email_recipients+bcc_recipients),text)
                 server.quit()
-            except: 
+            except : 
                 print('SMPT server connection error')
             return True
     def get_email_credentials(self,filepath=''): 
