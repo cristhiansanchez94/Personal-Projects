@@ -15,7 +15,7 @@ class PDF(FPDF):
         current_month = current_date.month
         current_day = current_date.day
         current_year = current_date.year
-        text = 'Bogotá D.C {month} {day} de {year}'.format(month=months[current_month-1], day=current_day, year=current_year)
+        text = 'Bogotá D.C, {month} {day} de {year}'.format(month=months[current_month-1], day=current_day, year=current_year)
         self.set_xy(30.0,20.0)
         self.cell(w=210.0,h=40.0,align='L',txt=text,border=0)
 
