@@ -6,12 +6,13 @@ from datetime import date
 current_directory = '/home/gdot/Documentos/Personal-Projects/Pdf Receipt writer '
 email_recipients_directory = '/home/gdot/Documentos/Personal-Projects/Pdf Receipt writer /email_recipients.txt'
 email_credentials_path='/home/gdot/Documentos/Personal-Projects/Pdf Receipt writer /email_credentials.txt'
-
+pdfTitle = ''
 os.chdir(current_directory)
 
 
 def create_pdf():
     '''Function that creates the receipt's pdf'''
+    global pdfTitle
     amount_value= quantity_num_text_field.get("1.0","end-1c")
     amount_text = quantity_text_text_field.get("1.0","end-1c")
     doc_num = receipt_number_text_field.get("1.0","end-1c")
@@ -23,11 +24,8 @@ def create_pdf():
     months = ['Enero','Febrero','Marzo','Abril','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
     current_month =date.today().month -2
     current_year = date.today().year
-    if current_month<0: 
-        current_month=11
     pdfTitle = 'Cuenta de Cobro UT {} {}- Cristhian Sánchez '.format(months[current_month],current_year)+'.pdf'
     pdf.output(pdfTitle,'F')
-    post_message('Pdf created successfully')
 
 def get_recipients_emails(filepath):
     '''Function used to get the recipients emails from the filepath'''
@@ -39,8 +37,14 @@ def get_recipients_emails(filepath):
     return email_recipients, bcc_recipients
 
 def send_email(): 
+    global pdfTitle 
     email_recipients,bcc_recipients = get_recipients_emails(email_recipients_directory)
-    emailSender.EmailSender().send_email(email_recipients,'Cuenta de Cobro UT', email_credentials_path,bcc_recipients,)
+    attachment_location = current_directory+'/'+pdfTitle
+    try: 
+        emailSender.EmailSender().send_email(email_recipients,'Cuenta de Cobro UT', email_credentials_path,bcc_recipients,attachment_location=attachment_location)
+        post_message('Email sent successfully')
+    except: 
+        post_message('Error sending the email',error=True)
 
 def close_windows(): 
     '''Function to close all open windows from the exit window'''
@@ -51,7 +55,7 @@ def post_message(message,error=False):
     '''Function used to create a window with a message
     Inputs: 
      - message: The message to be posted 
-     - error: Indicator if the message is an error o a simple message 
+     - error: Indicator if the message is an error or a simple message 
     ''' 
     global mainWindow 
     message_window = Toplevel(mainWindow)
