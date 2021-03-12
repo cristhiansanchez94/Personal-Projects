@@ -1,7 +1,14 @@
 from tkinter import *
 import pdfWriter 
 import os 
-os.chdir('/home/gdot/Documentos/Personal-Projects/Pdf Receipt writer ')
+import emailSender 
+from datetime import date
+current_directory = '/home/gdot/Documentos/Personal-Projects/Pdf Receipt writer '
+email_recipients_directory = '/home/gdot/Documentos/Personal-Projects/Pdf Receipt writer /email_recipients.txt'
+email_credentials_path='/home/gdot/Documentos/Personal-Projects/Pdf Receipt writer /email_credentials.txt'
+
+os.chdir(current_directory)
+
 
 def create_pdf():
     '''Function that creates the receipt's pdf'''
@@ -13,8 +20,27 @@ def create_pdf():
     pdf.draw_border()
     pdf.set_document_layout()
     pdf.set_document_values(doc_num,amount_text,amount_value)
-    pdf.output('output.pdf','F')
+    months = ['Enero','Febrero','Marzo','Abril','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+    current_month =date.today().month -2
+    current_year = date.today().year
+    if current_month<0: 
+        current_month=11
+    pdfTitle = 'Cuenta de Cobro UT {} {}- Cristhian Sánchez '.format(months[current_month],current_year)+'.pdf'
+    pdf.output(pdfTitle,'F')
     post_message('Pdf created successfully')
+
+def get_recipients_emails(filepath):
+    '''Function used to get the recipients emails from the filepath'''
+    with open(filepath,'r') as reader: 
+        text_content =reader.read()
+    email_recipients,bcc_recipients = text_content.split('/')
+    email_recipients = email_recipients.split(',') 
+    bcc_recipients = bcc_recipients.split(',')
+    return email_recipients, bcc_recipients
+
+def send_email(): 
+    email_recipients,bcc_recipients = get_recipients_emails(email_recipients_directory)
+    emailSender.EmailSender().send_email(email_recipients,'Cuenta de Cobro UT', email_credentials_path,bcc_recipients,)
 
 def close_windows(): 
     '''Function to close all open windows from the exit window'''
