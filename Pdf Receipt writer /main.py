@@ -24,7 +24,7 @@ def create_pdf():
     months = ['Enero','Febrero','Marzo','Abril','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
     current_month =date.today().month -2
     current_year = date.today().year
-    pdfTitle = 'Cuenta de Cobro UT {} {}- Cristhian Sánchez'.format(months[current_month],current_year)+'.pdf'
+    pdfTitle = 'Cuenta de Cobro UT {} {} - Cristhian Sánchez'.format(months[current_month],current_year)+'.pdf'
     try: 
         pdf.output(pdfTitle,'F')
         create_check_window()
@@ -47,7 +47,7 @@ def send_email():
     email_recipients,bcc_recipients = get_recipients_emails(email_recipients_directory)
     attachment_location = pdfTitle
     try: 
-        emailSender.EmailSender().send_email(email_recipients,'Cuenta de Cobro UT - Cristhian Sánchez', email_credentials_path,bcc_recipients,attachment_location=attachment_location)
+        emailSender.EmailSender().send_email(email_recipients,pdfTitle[:-4], email_credentials_path,bcc_recipients,attachment_location=attachment_location)
         os.remove(pdfTitle)
         post_message('Email sent successfully')
     except: 
