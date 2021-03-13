@@ -91,6 +91,9 @@ class DataWriter:
         sheet_name = months[current_month-1]
         df = pd.read_excel(os.path.join(os.getcwd(),'temp.xlsx'),usecols=None, sheet_name=None,engine='openpyxl')
         df[sheet_name] = df[sheet_name].append({'Date':current_date,'Working minutes':working_minutes,'Waiting minutes':waiting_minutes},ignore_index=True)
+        df[sheet_name]['Working earnings'] = df[sheet_name]['Working minutes']*6/60
+        df[sheet_name]['Waiting earnings'] = df[sheet_name]['Waiting minutes']*3/60
+        df[sheet_name]['Total earnings'] = df[sheet_name]['Waiting earnings']+ df[sheet_name]['Working earnings']
         with pd.ExcelWriter('output.xlsx') as writer: 
             for month in months: 
                 df[month].to_excel(writer,sheet_name=month,index=False)
@@ -100,4 +103,3 @@ class DataWriter:
         DataSheet.Upload()
         os.remove('output.xlsx')
         os.remove('temp.xlsx')
-    
