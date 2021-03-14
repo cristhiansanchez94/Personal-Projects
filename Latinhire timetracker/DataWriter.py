@@ -76,13 +76,15 @@ class DataWriter:
         '''
         SheetId = self.searchObject(SheetTitle,'root')
         if SheetId is None: 
-            if FolderTitle == '':
-                SheetId = self.createSheet(SheetTitle)
-            else: 
-                FolderId = self.searchObject(FolderTitle,'root')
-                if FolderId is None:
-                    FolderId = self.createFolder(FolderTitle)
-                SheetId = self.createSheet(SheetTitle, FolderId = FolderId)
+            SheetId = self.searchObject(SheetTitle+'.xlsx','root')
+            if SheetId is None:
+                if FolderTitle == '':
+                    SheetId = self.createSheet(SheetTitle)
+                else: 
+                    FolderId = self.searchObject(FolderTitle,'root')
+                    if FolderId is None:
+                        FolderId = self.createFolder(FolderTitle)
+                    SheetId = self.createSheet(SheetTitle, FolderId = FolderId)
         DataSheet = self.drive.CreateFile({'id':SheetId})
         DataSheet.GetContentFile('temp.xlsx')
         months =['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
