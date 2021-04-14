@@ -127,8 +127,6 @@ def ChangeStatus():
         current_status = 'working'
         working_time['font']='Verdana 19 bold'
         waiting_time['font']='Verdana 20'
-        working_counter+=1
-        current_session_counter+=1
     else: 
         current_status = 'waiting'
         current_session_counter = 18000
@@ -146,8 +144,13 @@ def EndShift():
     running = False
     window.quit()
     exit_window = create_exit_window()
-    working_minutes = str(max(round(calculate_minutes(working_counter),2),0))
-    waiting_minutes = str(max(round(calculate_minutes(waiting_counter),2),0))
+    delta_counter = (general_counter -18000)  - ((working_counter - 18000)+(waiting_counter - 18000))
+    working_counter +=delta_counter
+    change_time_label(total_working_time,working_counter)
+    change_time_label(total_waiting_time,waiting_counter)
+    change_time_label(stopwatch,general_counter)
+    working_minutes = str(round(calculate_minutes(working_counter),2))
+    waiting_minutes = str(round(calculate_minutes(waiting_counter),2))
     Label(exit_window,text=waiting_minutes, fg='black', font='Verdana 13').place(x=300,y=50)
     Label(exit_window,text=working_minutes, fg='black', font='Verdana 13').place(x=300,y=100)
     exit_window.mainloop()
@@ -160,7 +163,7 @@ def calculate_minutes(counter):
      -time_in_minutes: the total amount of minutes of the timestamp represented by counter
     '''
     dt = datetime.fromtimestamp(counter)
-    time_in_minutes = dt.hour*60 + dt.minute + (dt.second-1)/60
+    time_in_minutes = dt.hour*60 + dt.minute + (dt.second)/60
     return time_in_minutes
 
 def write_data_to_gdrive(folder_text_field,file_text_field): 
@@ -173,8 +176,8 @@ def write_data_to_gdrive(folder_text_field,file_text_field):
     global working_counter
     FolderTitle=folder_text_field.get("1.0","end-1c")
     SheetTitle= file_text_field.get("1.0","end-1c")
-    working_minutes = max(round(calculate_minutes(working_counter),2),0)
-    waiting_minutes = max(round(calculate_minutes(waiting_counter),2),0)
+    working_minutes = calculate_minutes(working_counter)
+    waiting_minutes = calculate_minutes(waiting_counter)
     try: 
         DataWriter.DataWriter().writeData(SheetTitle,FolderTitle,waiting_minutes,working_minutes)
         post_message('Data saved successfully')
