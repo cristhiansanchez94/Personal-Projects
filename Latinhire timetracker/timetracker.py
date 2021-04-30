@@ -124,6 +124,7 @@ def ChangeStatus():
     global working_counter
     global waiting_counter
     global current_session_counter
+    global num_sessions
     if current_status =='waiting': 
         current_status = 'working'
         working_time['font']='Verdana 19 bold'
