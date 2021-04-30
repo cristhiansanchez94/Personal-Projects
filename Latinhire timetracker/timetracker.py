@@ -130,6 +130,7 @@ def ChangeStatus():
         working_time['font']='Verdana 19 bold'
         waiting_time['font']='Verdana 20'
         num_sessions +=1
+        total_number_of_sessions['text'] = str(num_sessions)
     else: 
         current_status = 'waiting'
         current_session_counter = 18000
