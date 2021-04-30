@@ -12,6 +12,7 @@ waiting_counter = 18000
 working_counter = 18000
 current_session_counter = 18000
 running = False 
+num_sessions = 0
 text1Dict = {
 'End session':'If you don’t need further explanation on this question, we can end the session. I’d really appreciate you letting me know how I did by rating our session after you exit. Thanks and have a great day!',
 'Cheating': 'Before we start, may I ask, is this from a graded test, quiz, or timed assessment?',
@@ -127,6 +128,7 @@ def ChangeStatus():
         current_status = 'working'
         working_time['font']='Verdana 19 bold'
         waiting_time['font']='Verdana 20'
+        num_sessions +=1
     else: 
         current_status = 'waiting'
         current_session_counter = 18000
