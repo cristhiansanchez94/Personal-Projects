@@ -299,6 +299,10 @@ stop.pack(side='right')
 reset.pack(side='bottom')
 
 #Labels placement
+number_of_sessions = Label(window,text='Number of sessions', fg='black',font='Verdana 18')
+number_of_sessions.place(x=0,y=50)
+total_number_of_sessions = Label(window, text=str(0), fg='black', font='Verdana 30')
+total_number_of_sessions.place(x=100,y=80)
 stopwatch = Label(window, text=string,fg='black',font='Verdana 40 bold')
 stopwatch.place(x=250,y=75)
 waiting_time = Label(window, text='Waiting time',fg='black',font='Verdana 20')
