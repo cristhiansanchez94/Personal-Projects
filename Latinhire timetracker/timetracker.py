@@ -184,7 +184,7 @@ def write_data_to_gdrive(folder_text_field,file_text_field):
     working_minutes = calculate_minutes(working_counter)
     waiting_minutes = calculate_minutes(waiting_counter)
     try: 
-        DataWriter.DataWriter().writeData(SheetTitle,FolderTitle,waiting_minutes,working_minutes)
+        DataWriter.DataWriter().writeData(SheetTitle,FolderTitle,waiting_minutes,working_minutes,num_sessions)
         post_message('Data saved successfully')
     except: 
         post_message('There has been an error while saving',error=True)
