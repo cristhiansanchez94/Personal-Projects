@@ -157,6 +157,7 @@ def EndShift():
     waiting_minutes = str(round(calculate_minutes(waiting_counter),2))
     Label(exit_window,text=waiting_minutes, fg='black', font='Verdana 13').place(x=300,y=50)
     Label(exit_window,text=working_minutes, fg='black', font='Verdana 13').place(x=300,y=100)
+    Label(exit_window,text=num_sessions, fg='black', font='Verdana 13').place(x=300,y=150)
     exit_window.mainloop()
 
 def calculate_minutes(counter): 
@@ -248,14 +249,15 @@ def create_exit_window():
     global window
     exit_window = Toplevel(window)
     exit_window.title('')
-    exit_window.geometry("400x250")
+    exit_window.geometry("400x300")
     exit_window.resizable(0,0)
     Label(exit_window, text='Shift is over!',fg='black',font='Verdana 20 bold').pack()
     Label(exit_window, text='Total waiting minutes: ', fg='black', font='Verdana 15 bold').place(x=0,y=50)
     Label(exit_window, text='Total working minutes: ', fg='black', font='Verdana 15 bold').place(x=0,y=100)
-    Label(exit_window, text='Would you like to save this results? ', fg='black', font='Verdana 13').place(x=50,y=150)
-    Button(exit_window, text='Yes',width=10,command=create_saving_window).place(x=40,y=200)
-    Button(exit_window, text='No',width=10,command=close_windows).place(x=250,y=200)
+    Label(exit_window, text='Number of sessions: ', fg='black', font='Verdana 15 bold').place(x=0,y=150)
+    Label(exit_window, text='Would you like to save this results? ', fg='black', font='Verdana 13').place(x=50,y=200)
+    Button(exit_window, text='Yes',width=10,command=create_saving_window).place(x=40,y=250)
+    Button(exit_window, text='No',width=10,command=close_windows).place(x=250,y=250)
     return exit_window
 
 def create_saving_window(): 
