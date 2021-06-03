@@ -21,7 +21,7 @@ def create_pdf():
     pdf.draw_border()
     pdf.set_document_layout()
     pdf.set_document_values(doc_num,amount_text,amount_value)
-    months = ['Enero','Febrero','Marzo','Abril','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+    months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
     current_month =date.today().month -2
     current_year = date.today().year
     pdfTitle = 'Cuenta de Cobro UT {} {} - Cristhian Sánchez'.format(months[current_month],current_year)+'.pdf'
