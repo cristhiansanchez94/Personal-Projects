@@ -23,7 +23,7 @@ text1Dict = {
 'User Needs Help':'Just wanted to remind you that Brainly is intended for educational purposes only - are you able to continue staying focused on learning?',
 'Violent Threats':'Brainly has a zero-tolerance policy for violence and threats on our platform. I’ll be ending and reporting this session for a further safety review.',
 'Illegal Activiy':'Brainly is intended to be a safe place for students to get the help they need with their homework and school assignments. I’ll be ending and reporting this session for a further safety review.',
-'Wrong subject':'I am sorry, but I won\'t be able to help you with that question because (it is not in English/ I am a Math tutor/ it is too complex), perhaps you would like to post it on Brainly.com?',
+'Wrong subject':'Thank you for learning with Brainly Tutor! Unfortunately, we currently have only Math and Physics tutors answering your questions. If your question relates to another subject, please post it on  Brainly.com. As soon as we add a new subject to Brainly Tutor you will have an option to select it in your app!',
 'Not knowing the answer':'I am sorry, but I won\'t be able to help you with that question because it is outside of my expertise. Perhaps you would like to ask a different tutor or post it on Brainly.com?'
 }
 text1Dict_spa= {
@@ -36,7 +36,7 @@ text1Dict_spa= {
 'User Needs Help':'Sólo quería recordarte que Brainly es para objetivos educacionales únicamente - ¿Eres capaz de enfocarte en aprender?',
 'Violent Threats':'Brainly tiene una política de tolerancia cero para la violencia y las amenazas en nuestra plataforma. Voy a terminar y reportar esta sesión para una revisión posterior de seguridad.',
 'Illegal Activiy':'Brainly es un espacio seguro para que los estudiantes puedan recibir la ayuda que necesitan con su tarea y trabajos de la escuela. Voy a terminar y reportar esta sesión  para una revisión posterior de seguridad.',
-'Wrong subject':'Lo siento, pero no podré ayudarte con esta pregunta porque (soy un tutor de matemáticas / es muy compleja), depronto ¿quisieras publicarla en Brainly.com?',
+'Wrong subject':'Gracias por tu aprendizaje con Brainly Tutor! Infortunadamente, por el memento contamos con tutores de matemáticas y de física únicamente para resolver tus preguntas. Si tu pregunta se relaciona con otro tema, por favor publícala en Brainly.com. Tan pronto como agreguemos nuevas materias a Brainly Tutor tendrás la opción de seleccionarlo en tu app.',
 'Not knowing the answer':'Lo siento, pero no podré ayudar con esta pregunta porque está fuera de mi área de experticia. Depronto ¿quisieras preguntarle a otro tutor o publicarla en Brainly.com?'
 }
 text2Dict = {
@@ -49,7 +49,7 @@ text2Dict = {
 'User Needs Help':'I’m so sorry you’re feeling this way and strongly recommend that you talk to a parent or trusted adult about how you\'re feeling. You’re not alone, and there are some really helpful people at the Crisis Text Line http://www.crisistextline.org/ and the National Suicide Prevention Hotline (1-800-273-TALK) whom you can talk to confidentially. I have to end our session now, but a Brainly team member will be following up with you later today to make sure you’re doing okay.',
 'Violent Threats':'',
 'Illegal Activiy':'',
-'Wrong subject':'',
+'Wrong subject':'Hi, your question is from Physics, and this is Math. Unfortunately I will not be able to solve it for you. You can still get help with your question. In order to do so please close the session, select the correct subject and you will be matched with a tutor that can help you with this question.',
 'Not knowing the answer':''
 }
 text2Dict_spa = {
@@ -62,7 +62,7 @@ text2Dict_spa = {
 'User Needs Help':'Lamento que te sientas de esa forma. Te recomiendo que hables con un adulto de confianza sobre cómo te sientes. No estás solo, y hay ayuda muy útil en la línea de crisis http://www.crisistextline.org/ y la línea nacional de prevención del suicidio (1-800-273-TALK) con quién tú puedes hablar confidencialmente. Debo terminar nuestra sesión, pero un miembro del equipo de Brainly hará seguimiento contigo más tarde en el día para asegurarse de que estás bien.',
 'Violent Threats':'',
 'Illegal Activiy':'',
-'Wrong subject':'',
+'Wrong subject':'Hola, tú pregunta es de Física, y esto es Matemáticas. Infortunadamente no podré ayudarte. Sin embargo, sí es posible que recibas ayuda con tu pregunta. Para ello, por favor cierra la sesión, selecciona la materia correcta y serás emparejado con un tutor que te puede ayudar con tu pregunta.',
 'Not knowing the answer':''
 }
 
