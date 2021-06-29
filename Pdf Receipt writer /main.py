@@ -22,7 +22,7 @@ def create_pdf():
     pdf.set_document_layout()
     pdf.set_document_values(doc_num,amount_text,amount_value)
     months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
-    current_month =date.today().month -2
+    current_month =date.today().month -1-mode_var.get()
     current_year = date.today().year
     pdfTitle = 'Cuenta de Cobro UT {} {} - Cristhian Sánchez'.format(months[current_month],current_year)+'.pdf'
     try: 
@@ -97,7 +97,7 @@ Message(mainWindow, text='Generador de cuentas de cobro - UT',fg='black',font='V
 Label(mainWindow, text='Monto($):',fg='black',font='Verdana 10').place(x=25,y=100)
 Label(mainWindow, text='Monto(texto):',fg='black',font='Verdana 10').place(x=25,y=150)
 Label(mainWindow, text='Consecutivo:',fg='black',font='Verdana 10').place(x=25,y=200)
-Label(mainWindow, text='Ruta:',fg='black',font='Verdana 10').place(x=25,y=250)
+
 
 #Text fields 
 quantity_num_text_field = Text(mainWindow,height=1,width=20)
@@ -106,6 +106,12 @@ quantity_text_text_field = Text(mainWindow,height=1,width=20)
 quantity_text_text_field.place(x=150,y=150)
 receipt_number_text_field = Text(mainWindow,height=1,width=20)
 receipt_number_text_field.place(x=150,y=200)
+
+#Mode Selector 
+mode_var = IntVar(mainWindow,1)
+Label(mainWindow, text='Mes:',fg='black',font='Verdana 10').place(x=25,y=250)
+Radiobutton(mainWindow, text='Actual', value=0, variable=mode_var).place(x=135,y=250)
+Radiobutton(mainWindow, text='Anterior', value=1, variable=mode_var).place(x=235,y=250)
 
 #Button
 Button(mainWindow, text='Generar pdf',width=15, command = create_pdf).place(x=100,y=300)
