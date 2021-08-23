@@ -29,7 +29,6 @@ class DataWriter:
             for month in months: 
                 df.to_excel(writer,sheet_name=month,index=False)
             writer.save()
-            writer.close()
         file.SetContentFile('output.xlsx')
         file['title']=SheetTitle
         file.Upload()
@@ -100,7 +99,6 @@ class DataWriter:
             for month in months: 
                 df[month].to_excel(writer,sheet_name=month,index=False)
             writer.save()
-            writer.close()
         DataSheet.SetContentFile('output.xlsx')
         DataSheet.Upload()
         os.remove('output.xlsx')
