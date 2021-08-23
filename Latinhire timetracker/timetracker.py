@@ -3,8 +3,9 @@ from datetime import datetime, date
 import time 
 import DataWriter
 import os 
+import traceback 
 
-os.chdir('/home/gdot/Documentos/Personal-Projects/Latinhire timetracker')
+os.chdir('/home/spinto/Desktop/Personal-Projects/Latinhire timetracker')
 
 
 general_counter = 18000
@@ -13,6 +14,8 @@ working_counter = 18000
 current_session_counter = 18000
 running = False 
 num_sessions = 0
+current_status='waiting'
+
 text1Dict = {
 'End session':'If you don’t need further explanation on this question, we can end the session. I’d really appreciate you letting me know how I did by rating our session after you exit. Thanks and have a great day!',
 'Cheating': 'Before we start, may I ask, is this from a graded test, quiz, or timed assessment?',
@@ -66,8 +69,6 @@ text2Dict_spa = {
 'Not knowing the answer':''
 }
 
-current_status='waiting'
-running=False 
 
 def change_time_label(label,counter):
     '''Function that updates a label timestamp with a counter 
@@ -186,7 +187,8 @@ def write_data_to_gdrive(folder_text_field,file_text_field):
     try: 
         DataWriter.DataWriter().writeData(SheetTitle,FolderTitle,waiting_minutes,working_minutes,num_sessions)
         post_message('Data saved successfully')
-    except: 
+    except Exception as e: 
+        print(traceback.format_exc())
         post_message('There has been an error while saving',error=True)
 
 def post_message(message,error=False):
