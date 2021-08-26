@@ -107,6 +107,8 @@ def time_tracker():
                     working_counter+=1
                     change_time_label(current_session_time,current_session_counter)
                     current_session_counter+=1
+                    if current_session_counter==18900: 
+                        post_message("15 min already",alert=True)
     count()
 
 def StartShift(label): 
@@ -191,7 +193,7 @@ def write_data_to_gdrive(folder_text_field,file_text_field):
         print(traceback.format_exc())
         post_message('There has been an error while saving',error=True)
 
-def post_message(message,error=False):
+def post_message(message,error=False, alert = False):
     '''Function used to create a window with a message
     Inputs: 
      - message: The message to be posted 
@@ -203,7 +205,7 @@ def post_message(message,error=False):
     message_window.geometry("350x100")
     message_window.resizable(0,0)
     Label(message_window, text=message, fg='black', font='Verdana 12').place(x=40,y=20)
-    if error: 
+    if error or alert: 
         Button(message_window, text='Ok', width=20, command=message_window.destroy).place(x=70,y=60)
     else: 
         Button(message_window, text='Ok', width=20, command=close_windows).place(x=70,y=60)
