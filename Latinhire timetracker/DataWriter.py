@@ -62,7 +62,7 @@ class DataWriter:
                 return file['id']
             if file['mimeType']=='application/vnd.google-apps.folder': 
                 foundId = self.searchObject(searchedObjectTitle,file['id'])
-            return foundId 
+        return foundId 
 
     def writeData(self,SheetTitle, FolderTitle,waiting_minutes, working_minutes,number_of_sessions): 
         '''Function that writes the data to the specified google drive. Whenever 
