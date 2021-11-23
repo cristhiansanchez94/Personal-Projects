@@ -3,9 +3,9 @@ import pdfWriter
 import os 
 import emailSender 
 from datetime import date
-current_directory = '/home/gdot/Documentos/Personal-Projects/Pdf Receipt writer '
-email_recipients_directory = '/home/gdot/Documentos/Personal-Projects/Pdf Receipt writer /email_recipients.txt'
-email_credentials_path='/home/gdot/Documentos/Personal-Projects/Pdf Receipt writer /email_credentials.txt'
+current_directory = os.path.dirname(__file__)
+email_recipients_directory = os.path.join(os.path.dirname(__file__),'email_recipients.txt')
+email_credentials_path=os.path.join(os.path.dirname(__file__),'email_credentials.txt')
 pdfTitle = ''
 os.chdir(current_directory)
 
