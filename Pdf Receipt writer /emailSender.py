@@ -3,6 +3,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 import os.path
+import traceback
 class EmailSender(): 
     def send_email(self, email_recipients, email_subject,email_credentials_path, bcc_recipients=[], attachment_location=''): 
         '''
@@ -38,15 +39,15 @@ Cristhian Sánchez'''
             part.add_header('Content-Disposition','attachment', filename= filename)
             msg.attach(part)
             try: 
-                server = smtplib.SMTP('smtp.gmail.com',587)
+                server = smtplib.SMTP_SSL('smtp.gmail.com',465)
                 server.ehlo()
-                server.starttls()
                 server.login(email_sender,password)
                 text = msg.as_string()
                 server.sendmail(email_sender,(email_recipients+bcc_recipients),text)
                 server.quit()
             except : 
                 print('SMPT server connection error')
+                print(traceback.format_exc())
             return True
     def get_email_credentials(self,filepath=''): 
         '''Function that retrieves the email credentials from the file path
