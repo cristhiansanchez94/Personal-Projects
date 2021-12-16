@@ -65,6 +65,9 @@ class DataWriter:
                 foundId = self.searchObject(searchedObjectTitle,file['id'])
         return foundId 
 
+    def calculate_average_costs(df): 
+        df[df.Tipo=='Compra'].groupby(['Ticker'],as_index=False)[['Monto']].sum()
+
     def writeData(self,SheetTitle, FolderTitle,waiting_minutes, working_minutes,number_of_sessions): 
         '''Function that writes the data to the specified google drive. Whenever 
         file doesn't exist, it creates it depending on the folder title. 
@@ -75,23 +78,13 @@ class DataWriter:
          - working_minutes: The working minutes value to be safed
         '''
         SheetId = self.searchObject(SheetTitle,'root')
-        if SheetId is None: 
-            SheetId = self.searchObject(SheetTitle+'.xlsx','root')
-            if SheetId is None:
-                if FolderTitle == '':
-                    SheetId = self.createSheet(SheetTitle)
-                else: 
-                    FolderId = self.searchObject(FolderTitle,'root')
-                    if FolderId is None:
-                        FolderId = self.createFolder(FolderTitle)
-                    SheetId = self.createSheet(SheetTitle, FolderId = FolderId)
         DataSheet = self.drive.CreateFile({'id':SheetId})
-        DataSheet.GetContentFile('temp.xlsx')
-        months =['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-        current_date = date.today()
-        current_month = current_date.month
-        sheet_name = months[current_month-1]
+        DataSheet.GetContentFile('temp.xlsx',mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        sheet_names = ['Acciones','Crypto']
         df = pd.read_excel(os.path.join(os.getcwd(),'temp.xlsx'),usecols=None, sheet_name=None,engine='openpyxl')
+        for sheet_name in sheet_names: 
+            asset_df = df[sheet_name] 
+            asset_df.groupby(['Ticker'])        
         df[sheet_name] = df[sheet_name].append({'Date':current_date,'Working minutes':working_minutes,'Waiting minutes':waiting_minutes, 'Number of sessions': number_of_sessions},ignore_index=True)
         df[sheet_name]['Working earnings'] = df[sheet_name]['Working minutes']*6/60
         df[sheet_name]['Waiting earnings'] = df[sheet_name]['Waiting minutes']*3/60
@@ -104,5 +97,3 @@ class DataWriter:
         DataSheet.Upload()
         os.remove('output.xlsx')
         os.remove('temp.xlsx')
-#writer = DataWriter() 
-#writer.searchObject('Inversiones','root')
