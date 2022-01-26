@@ -3,9 +3,10 @@ import pdfWriter
 import os 
 import emailSender 
 from datetime import date
+import traceback
 current_directory = os.path.dirname(__file__)
-email_recipients_directory = os.path.join(os.path.dirname(__file__),'email_recipients.txt')
-email_credentials_path=os.path.join(os.path.dirname(__file__),'email_credentials.txt')
+email_recipients_directory = os.path.join(os.path.dirname(os.path.realpath(__file__)),'email_recipients.txt')
+email_credentials_path=os.path.join(os.path.dirname(os.path.realpath(__file__)),'email_credentials.txt')
 pdfTitle = ''
 os.chdir(current_directory)
 
@@ -29,6 +30,7 @@ def create_pdf():
         pdf.output(pdfTitle,'F')
         create_check_window()
     except: 
+        print(traceback.format_exc())
         post_message('Error while creating the pdf',error=True)
     
 
@@ -51,6 +53,7 @@ def send_email():
         os.remove(pdfTitle)
         post_message('Email sent successfully')
     except: 
+        print(traceback.format_exc())
         post_message('Error sending the email',error=True)
 
 def close_windows(): 
