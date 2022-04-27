@@ -4,7 +4,7 @@ import os
 import emailSender 
 from datetime import date
 import traceback
-current_directory = os.path.dirname(__file__)
+current_directory = os.path.dirname(os.path.realpath(__file__))
 email_recipients_directory = os.path.join(os.path.dirname(os.path.realpath(__file__)),'email_recipients.txt')
 email_credentials_path=os.path.join(os.path.dirname(os.path.realpath(__file__)),'email_credentials.txt')
 pdfTitle = ''
