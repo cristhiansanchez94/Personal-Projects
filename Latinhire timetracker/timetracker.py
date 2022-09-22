@@ -5,7 +5,8 @@ import DataWriter
 import os 
 import traceback 
 
-os.chdir('/home/spinto/Desktop/Personal-Projects/Latinhire timetracker')
+
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 
 general_counter = 18000
