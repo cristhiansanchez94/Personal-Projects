@@ -1,6 +1,5 @@
 from tkinter import * 
 from datetime import datetime, date 
-import time 
 import DataWriter
 import os 
 import traceback 
