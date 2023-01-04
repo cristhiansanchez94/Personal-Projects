@@ -1,5 +1,7 @@
 from shutil import move
 import pandas as pd 
+import numpy as np 
+import traceback 
 
 class Stock(): 
     def __init__(self, ticker:str, stock_df: pd.DataFrame, split_params: dict = {}): 
@@ -11,8 +13,12 @@ class Stock():
         self.sold_amount = 0 
         self.sold_amount_value = 0 
         self.average_price = 0
+        self.fifo_average_price = 0
         self.result = {}
         self.total_movements = []
+        self.purchased_amounts = []
+        self.purchased_prices = []
+        self.purchase_flags = []
         self.min_date = stock_df.enteredAt.min()
         self.max_date = stock_df.enteredAt.max()
         self.split_factor = 0 
@@ -25,6 +31,10 @@ class Stock():
         if round(self.quantity,5) <=0: 
             self.quantity = 0
             self.average_price = 0
+            self.fifo_average_price = 0
+            self.purchased_amounts = []
+            self.purchased_prices = []
+            self.purchase_flags = []
             profit = 0 if self.bought_amount_value == 0 else self.sold_amount_value - self.bought_amount_value
             pl = -1 if self.bought_amount_value ==0 else round(profit / self.bought_amount_value,4)
             self.total_movements.append({
@@ -38,20 +48,45 @@ class Stock():
                 )
             self.bought_amount_value = 0 
             self.sold_amount_value = 0 
+    
+    def update_purchase_flags(self, quantity): 
+        first_flag_index = self.purchase_flags.index(1)
+        accumulated_quantity = 0 
+        for index in range(first_flag_index, len(self.purchase_flags)): 
+            if accumulated_quantity + self.purchased_amounts[index]<=quantity: 
+                accumulated_quantity += self.purchased_amounts[index]
+                self.purchase_flags[index] = 0
+            else: 
+                break        
         
             
-    def register_movement(self,movement_type, quantity, movement_value): 
+    def register_movement(self,movement_type, quantity, movement_value, movement_price): 
         if movement_type == 1: 
             self.bought_amount += quantity
             self.bought_amount_value += movement_value
+            self.purchased_amounts.append(quantity)
+            self.purchased_prices.append(movement_price)
+            self.purchase_flags.append(1)
         else: 
             self.sold_amount += quantity
-            self.sold_amount_value += movement_value     
-            
-    def calculate_average_price(self, movement_type, quantity, price): 
-        average_price = self.average_price 
-        stock_quantity = self.quantity
-        self.average_price = (average_price*stock_quantity + movement_type*quantity*price)/(stock_quantity + movement_type*quantity)
+            self.sold_amount_value += movement_value   
+            if self.purchase_flags:  
+                self.update_purchase_flags(quantity)
+        
+    def calculate_average_price(self, movement_type, quantity, price, methodology='Normal'): 
+        if methodology=='Normal':
+            if movement_type == 1:
+                average_price = self.average_price 
+                stock_quantity = self.quantity
+                self.average_price = (average_price*stock_quantity + movement_type*quantity*price)/(stock_quantity + movement_type*quantity)
+        else: 
+            #Implement fifo methodology
+            if self.purchase_flags:
+                purchased_amounts = np.array(self.purchased_amounts)
+                flags = np.array(self.purchase_flags)
+                purchased_prices = np.array(self.purchased_prices)
+                self.fifo_average_price = np.dot(purchased_amounts*flags, purchased_prices*flags)/np.sum(purchased_amounts*flags)
+                
     
     def update_quantity(self, movement_type, quantity): 
         self.quantity += movement_type*quantity
@@ -81,9 +116,9 @@ class Stock():
             if self.quantity==0: 
                 self.min_date = movement_date 
             self.max_date = movement_date
-            self.register_movement(movement_type, movement_quantity, movement_value)
-            if movement_type ==1: 
-                self.calculate_average_price(movement_type, movement_quantity, movement_price)
+            self.register_movement(movement_type, movement_quantity, movement_value, movement_price)
+            self.calculate_average_price(movement_type, movement_quantity, movement_price)
+            self.calculate_average_price(movement_type, movement_quantity, movement_price, methodology = 'FIFO')
             self.update_quantity(movement_type, movement_quantity)
             self.correct_stock_quantity_and_price()
         current_value = round(self.average_price * self.quantity,2)
@@ -100,6 +135,7 @@ class Stock():
                        'sold_amount': self.sold_amount_value,  
                         'available_quantity': self.quantity, 
                        'remaining_quantity': self.remaining_quantity,
+                       'fifo_average_price': round(self.fifo_average_price,2),
                        'average_price': round(self.average_price,2),
                        'total_fees': data['feesUSD'].sum(), 
                        'current_value': current_value                       

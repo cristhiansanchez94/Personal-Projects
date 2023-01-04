@@ -16,6 +16,7 @@ REPLACE_DICT = {
     'sold_amount':'cantidad vendida (USD)', 
     'available_quantity': 'acciones disponibles',
     'remaining_quantity': 'acciones remanentes',
+    'fifo_average_price': 'precio promedio (FIFO)', 
     'average_price': 'precio promedio',
     'total_fees': 'total fees',
     'current_value': 'valor actual', 
