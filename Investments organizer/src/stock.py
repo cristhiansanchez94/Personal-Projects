@@ -32,9 +32,10 @@ class Stock():
         self.purchased_amounts = []
         self.purchased_prices = []
         self.purchase_flags = []
+        
     def correct_stock_quantity_and_price(self): 
         if round(self.quantity,5) <=0: 
-            self.reset_quantities
+            self.reset_quantities()
             profit = 0 if self.bought_amount_value == 0 else self.sold_amount_value - self.bought_amount_value
             pl = -1 if self.bought_amount_value ==0 else round(profit / self.bought_amount_value,4)
             self.total_movements.append({
