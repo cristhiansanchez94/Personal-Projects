@@ -1,7 +1,5 @@
-from shutil import move
 import pandas as pd 
 import numpy as np 
-import traceback 
 
 class Stock(): 
     def __init__(self, ticker:str, stock_df: pd.DataFrame, split_params: dict = {}): 
@@ -26,15 +24,17 @@ class Stock():
         if split_params: 
             self.split_factor = split_params.get('factor')
             self.split_date = split_params.get('date')
-    
+            
+    def reset_quantities(self):
+        self.quantity = 0
+        self.average_price = 0
+        self.fifo_average_price = 0
+        self.purchased_amounts = []
+        self.purchased_prices = []
+        self.purchase_flags = []
     def correct_stock_quantity_and_price(self): 
         if round(self.quantity,5) <=0: 
-            self.quantity = 0
-            self.average_price = 0
-            self.fifo_average_price = 0
-            self.purchased_amounts = []
-            self.purchased_prices = []
-            self.purchase_flags = []
+            self.reset_quantities
             profit = 0 if self.bought_amount_value == 0 else self.sold_amount_value - self.bought_amount_value
             pl = -1 if self.bought_amount_value ==0 else round(profit / self.bought_amount_value,4)
             self.total_movements.append({
