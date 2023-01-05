@@ -10,7 +10,8 @@ SPLIT_DICT = {
     'GOOGL':{'factor':20,'date':'2022-07-18'}, 
     'GOOG':{'factor':20,'date':'2022-07-18'},
     'AMZN':{'factor':20, 'date': '2022-06-06'}, 
-    'TSLA':{'factor':3, 'date':'2022-08-25'}
+    'TSLA':{'factor':3, 'date':'2022-08-25'}, 
+    'GE'  :{'factor':1281/1000, 'date':'2023-01-04'}
 }
 
 def generate_reports(split_already = True):
