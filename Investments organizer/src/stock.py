@@ -36,7 +36,7 @@ class Stock():
         self.sold_amount_value = 0 
         
     def correct_stock_quantity_and_price(self): 
-        if round(self.quantity,5) <=0: 
+        if self.quantity*self.average_price <0.05: 
             profit = 0 if self.bought_amount_value == 0 else self.sold_amount_value - self.bought_amount_value
             pl = -1 if self.bought_amount_value ==0 else round(profit / self.bought_amount_value,4)
             self.total_movements.append({
@@ -94,7 +94,7 @@ class Stock():
     
     def process_movements(self): 
         data = self.movements_df 
-        data = data.query('status=="filled"').loc[:, ['enteredAt','executedAt','side','symbol','filledQuantity','amount','price','service','feesUSD']]
+        data = data.query('status=="filled"').loc[:, ['enteredAt','side','symbol','filledQuantity','amount','price','feesUSD']]
         data = data.assign(movement_type = data.side.apply(lambda x: 1 if x=='BUY' else -1))
         data.sort_values(by='enteredAt',inplace=True)
         data.reset_index(drop=True, inplace=True)
