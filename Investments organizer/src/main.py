@@ -1,22 +1,20 @@
 import tkinter as tkt
+from wrappinglabel import WrappingLabel
 from functions import generate_reports, save_report
 import os 
 
-class WrappingLabel(tkt.Label):
-    '''a type of Label that automatically adjusts the wrap to the size'''
-    def __init__(self, master=None, **kwargs):
-        tkt.Label.__init__(self, master, **kwargs)
-        self.bind('<Configure>', lambda e: self.config(wraplength=self.winfo_width()))
 
 stock_report, pl_report = generate_reports()
 stock_report = stock_report[(stock_report.available_quantity>0) | (stock_report.remaining_quantity>0)]
 PATH = path = os.path.join(os.path.dirname(__file__))
 
-def update_vars(*args):
-    ticker = case_select_var.get()
+def get_info_for_ticker(ticker): 
     stock_info = stock_report[stock_report.ticker==ticker].to_dict(orient='list')
     stock_info = {key:stock_info.get(key)[0] for key in stock_info}
-    print(stock_info)
+    return stock_info
+
+def update_vars(*args):
+    ticker = case_select_var.get()
 
 #Window Geometry
 
