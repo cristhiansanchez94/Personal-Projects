@@ -7,9 +7,18 @@ class DataHandler:
     def __init__(self): 
         os.chdir(os.path.dirname(__file__))
         self.gauth = GoogleAuth()
-        self.gauth.LocalWebserverAuth()
+        self.gauth.LoadClientConfig()
+        self.check_auth_conn()
         self.drive = GoogleDrive(self.gauth)
-
+        
+    def check_auth_conn(self): 
+        if self.gauth.credentials is None: 
+            self.gauth.LocalWebserverAuth()  
+        elif self.gauth.access_token_expired:
+            self.gauth.Refresh()
+        else:
+            self.gauth.Authorize()
+            
     def searchObject(self,searchedObjectTitle, parent_folder_id):
         '''Function that searches for an object over the entire tree of the google drive. 
         It uses a recursive algorithm. 

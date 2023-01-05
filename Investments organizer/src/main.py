@@ -14,7 +14,7 @@ SPLIT_DICT = {
 }
 
 def generate_reports(split_already = True):
-    data = dp.load_data(path='/home/csanchez/Desktop/Personal-Projects/Investments organizer/acciones.csv')
+    data = dp.load_data()
     data.symbol = data.symbol.replace({'FB':'META'})
     symbol_group = data.groupby('symbol')
     stock_report = []
