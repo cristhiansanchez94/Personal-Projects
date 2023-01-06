@@ -27,21 +27,60 @@ def set_values_in_vars(ticker_info):
     total_invested_amount_var.set(round(ticker_info.get('bought_amount'),2))
     total_sold_amount_var.set(round(ticker_info.get('sold_amount'),2))
     portfolio_percentage_var.set(str(round(ticker_info.get('portfolio_percentage')*100,2))+'%')
-    required_amount_var.set('')
     new_avg_price_var.set('')
+    required_amount_var.set('')
+    current_price_var.set('')
     desired_avg_price_var.set('')
     amount_to_invest_var.set('')
+    
 
 def update_vars(*args):
     ticker = case_select_var.get()
     stock_info = get_info_for_ticker(ticker)
     set_values_in_vars(stock_info)
+    
+def update_calculations_with_current_price(*args): 
+    current_price = current_price_var.get()
+    if current_price=='': 
+        required_amount_var.set('')
+        new_avg_price_var.set('')
+    else: 
+        desired_avg_price = desired_avg_price_var.get()
+        amount_to_invest = amount_to_invest_var.get()
+        if desired_avg_price!='': 
+            calculate_required_amount(*args)
+        if amount_to_invest!='':
+            calculate_new_average_price(*args)
+    
+def calculate_required_amount(*args):
+    current_price = current_price_var.get()
+    desired_avg_price = desired_avg_price_var.get()
+    if current_price!='' and desired_avg_price!='':        
+        current_price = float(current_price)
+        average_price = float(avg_price_var.get())
+        stocks_quantity = float(available_stocks_var.get())
+        desired_avg_price = float(desired_avg_price)
+        required_amount_var.set(round(stocks_quantity*(desired_avg_price - average_price)/(1 - (desired_avg_price/current_price)),2))
+    else: 
+        required_amount_var.set('')
+
+def calculate_new_average_price(*args):
+    current_price = current_price_var.get()
+    amount_to_invest = amount_to_invest_var.get()
+    if current_price!='' and amount_to_invest!='':
+        current_price = float(current_price)
+        average_price = float(avg_price_var.get())
+        stocks_quantity = float(available_stocks_var.get())
+        amount_to_invest = float(amount_to_invest)
+        new_avg_price_var.set(round((average_price*stocks_quantity+amount_to_invest)/(stocks_quantity+amount_to_invest/current_price),2))
+    else: 
+        new_avg_price_var.set('')
 
 #Window Geometry
 
 window = tkt.Tk()
 window.title('Stock controller')
-window.geometry("600x580")
+window.geometry("600x550")
 window.resizable(0,0)
 
 #Variables 
@@ -54,18 +93,20 @@ remaining_stocks_var = tkt.StringVar(window)
 total_invested_amount_var = tkt.StringVar(window)
 total_sold_amount_var = tkt.StringVar(window)
 portfolio_percentage_var = tkt.StringVar(window)
+current_price_var = tkt.StringVar(window)
 desired_avg_price_var = tkt.StringVar(window)
 required_amount_var = tkt.StringVar(window)
 amount_to_invest_var = tkt.StringVar(window)
 new_avg_price_var = tkt.StringVar(window)
 
+#set default value for variables
 set_values_in_vars(get_info_for_ticker(TICKERS[0]))
 
 #Labels Placement 
 total_investment_title = tkt.Label(window, text = 'Total invested amount(account): ', fg='black', font='Verdana 15')
 total_investment_title.place(x=0, y=20)
 total_investment = tkt.Label(window, text = str(stock_report.bought_amount.sum()), fg='black', font='Verdana 18 bold')
-total_investment.place(x=400, y=20)
+total_investment.place(x=LABELS_X, y=20)
 
 share_label = tkt.Label(window, text='Share:', fg='black', font='Verdana 18')
 share_label.place(x=0,y=50)
@@ -121,17 +162,36 @@ portfolio_percentage_label.place(x=LABELS_X, y=320)
 
 avg_price_calculator_title = tkt.Label(window, text='Avg. price calculator', fg='black', font='Verdana 20 bold')
 avg_price_calculator_title.place(x=150,y=350)
+
 current_price_title = WrappingLabel(window, text='Current price', fg='black', font='Verdana 18', width=10)
 current_price_title.place(x=0, y=390)
+current_price_entry = tkt.Entry(window, width=8, textvariable=current_price_var, justify='center', font=('verdana', 18))
+current_price_entry.place(x=15, y=440)
+
 desired_avg_price_title = WrappingLabel(window, text='Desired avg. price', fg='black', font='Verdana 18', width=10)
 desired_avg_price_title.place(x=120, y=390)
+desired_avg_entry = tkt.Entry(window, width=8, textvariable=desired_avg_price_var, justify='center', font=('verdana', 18))
+desired_avg_entry.place(x=135, y=440)
+
 required_amount_title = WrappingLabel(window, text='Required amount', fg='black', font='Verdana 18', width=10)
 required_amount_title.place(x=240, y=390)
+required_amount_label = tkt.Label(window, textvariable=required_amount_var, fg='black', font='Verdana 18', width=10)
+required_amount_label.place(x=255, y=440)
 
 amount_to_invest_title = WrappingLabel(window, text='Amount to invest', fg='black', font='Verdana 18', width=10)
 amount_to_invest_title.place(x=360, y=390)
-nev_avg_price_title = WrappingLabel(window, text='New avg. price', fg='black', font='Verdana 18', width=10)
-nev_avg_price_title.place(x=480, y=390)
+amount_to_invest_entry = tkt.Entry(window, width=8, textvariable=amount_to_invest_var, justify='center', font=('verdana', 18))
+amount_to_invest_entry.place(x=375, y=440)
+
+new_avg_price_title = WrappingLabel(window, text='New avg. price', fg='black', font='Verdana 18', width=10)
+new_avg_price_title.place(x=480, y=390)
+new_avg_price_label = tkt.Label(window, textvariable=new_avg_price_var, fg='black', font='Verdana 18', width=10)
+new_avg_price_label.place(x=495, y=440)
+
+
+amount_to_invest_var.trace("w",calculate_new_average_price)
+desired_avg_price_var.trace("w",calculate_required_amount)
+current_price_var.trace("w",update_calculations_with_current_price)
 
 #Button frame 
 generate_report_button = tkt.Button(window, text='Save general report', width =50, command = lambda:save_report(stock_report, pl_report, PATH), state='normal')
