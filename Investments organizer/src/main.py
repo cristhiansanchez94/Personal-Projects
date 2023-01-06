@@ -1,4 +1,4 @@
-from tkinter import StringVar, Tk, Label, Entry, Button, OptionMenu
+from tkinter import StringVar, Tk, Label, Entry, Button, OptionMenu, Toplevel
 from datetime import datetime 
 from os.path import join, dirname
 
@@ -62,6 +62,26 @@ def calculate_required_amount(*args):
         required_amount_var.set(round(stocks_quantity*(desired_avg_price - average_price)/(1 - (desired_avg_price/current_price)),2))
     else: 
         required_amount_var.set('')
+        
+def create_saved_report_window():
+    '''Function used to create a window with a message
+    Inputs: 
+     - message: The message to be posted 
+     - error: Indicator if the message is an error o a simple message 
+    ''' 
+    global window 
+    message_window = Toplevel(window)
+    message_window.title('')
+    message_window.geometry("350x100")
+    message_window.resizable(0,0)
+    message = 'Report saved succesfully'
+    Label(message_window, text=message, fg='black', font='Verdana 12').place(x=40,y=20)
+    Button(message_window, text='Ok', width=20, command=message_window.destroy).place(x=70,y=60)
+ 
+        
+def save_report_flow(stock_report,pl_report,path):
+    save_report(stock_report,pl_report,path)
+    create_saved_report_window()
 
 def calculate_new_average_price(*args):
     current_price = current_price_var.get()
@@ -193,7 +213,7 @@ desired_avg_price_var.trace("w",calculate_required_amount)
 current_price_var.trace("w",update_calculations_with_current_price)
 
 #Button frame 
-generate_report_button = Button(window, text='Save general report', width =50, command = lambda:save_report(stock_report, pl_report, PATH), state='normal')
+generate_report_button = Button(window, text='Save general report', width =50, command = lambda:save_report_flow(stock_report, pl_report, PATH), state='normal')
 generate_report_button.pack(side='bottom',pady=30)
  
  
