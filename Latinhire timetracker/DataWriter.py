@@ -5,10 +5,20 @@ from datetime import date
 import os
 
 class DataWriter: 
-    def __init__(self): 
+    def __init__(self):
+        os.chdir(os.path.dirname(__file__))
         self.gauth = GoogleAuth()
-        self.gauth.LocalWebserverAuth()
+        self.gauth.LoadClientConfig()
+        self.check_auth_conn()
         self.drive = GoogleDrive(self.gauth)
+        
+    def check_auth_conn(self): 
+        if self.gauth.credentials is None: 
+            self.gauth.LocalWebserverAuth()  
+        elif self.gauth.access_token_expired:
+            self.gauth.Refresh()
+        else:
+            self.gauth.Authorize()
 
     def createSheet(self,SheetTitle,FolderId=None):
         '''Function that creates a google sheets at the specified folder. If no folder 
