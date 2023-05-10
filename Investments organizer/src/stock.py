@@ -10,6 +10,7 @@ class Stock():
         self.bought_amount_value = 0 
         self.sold_amount = 0 
         self.sold_amount_value = 0 
+        self.remaining_amount_value = 0
         self.average_price = 0
         self.fifo_average_price = 0
         self.result = {}
@@ -88,6 +89,7 @@ class Stock():
                 purchased_prices = np.array(self.purchased_prices)
                 self.fifo_average_price = np.dot(purchased_amounts*flags, purchased_prices*flags)/np.sum(purchased_amounts*flags)
                 
+                
     
     def update_quantity(self, movement_type, quantity): 
         self.quantity += movement_type*quantity
@@ -128,12 +130,14 @@ class Stock():
             self.remaining_quantity = self.remaining_quantity + self.quantity 
             self.quantity = 0 
             self.average_price = 0 
+        self.remaining_amount_value = max(self.bought_amount_value-self.sold_amount_value, 0)
         self.result = {
                         'ticker': self.ticker,
                         'min_date': self.min_date,
                        'max_date': self.max_date,                       
                        'bought_amount': self.bought_amount_value, 
                        'sold_amount': self.sold_amount_value,  
+                       'remaining_amount': self.remaining_amount_value,
                         'available_quantity': self.quantity, 
                        'remaining_quantity': self.remaining_quantity,
                        'fifo_average_price': round(self.fifo_average_price,2),

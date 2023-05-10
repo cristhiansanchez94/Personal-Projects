@@ -124,7 +124,7 @@ set_values_in_vars(get_info_for_ticker(TICKERS[0]))
 #Labels Placement 
 total_investment_title = Label(window, text = 'Total invested amount(account): ', fg='black', font='Verdana 15')
 total_investment_title.place(x=0, y=20)
-total_investment = Label(window, text = str(stock_report.bought_amount.sum()), fg='black', font='Verdana 18 bold')
+total_investment = Label(window, text = str(stock_report.remaining_amount.sum()), fg='black', font='Verdana 18 bold')
 total_investment.place(x=LABELS_X, y=20)
 
 share_label = Label(window, text='Share:', fg='black', font='Verdana 18')

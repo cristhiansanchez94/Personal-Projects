@@ -31,7 +31,7 @@ def generate_reports(split_already = True):
         if stock.total_movements: 
             pl_report.extend(stock.total_movements)
     stock_report = pd.DataFrame(stock_report)
-    stock_report = stock_report.assign(portfolio_percentage=stock_report.bought_amount/stock_report.bought_amount.sum())
+    stock_report = stock_report.assign(portfolio_percentage=stock_report.remaining_amount/stock_report.remaining_amount.sum())
     pl_report = pd.DataFrame(pl_report)    
     return stock_report, pl_report
 
