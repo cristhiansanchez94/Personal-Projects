@@ -6,12 +6,12 @@ import traceback
 
 
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
+COUNTER = -3600
 
-
-general_counter = 18000
-waiting_counter = 18000
-working_counter = 18000
-current_session_counter = 18000
+general_counter = COUNTER
+waiting_counter = COUNTER
+working_counter = COUNTER
+current_session_counter = COUNTER
 running = False 
 num_sessions = 0
 current_status='waiting'
@@ -89,7 +89,7 @@ def time_tracker():
             global waiting_counter
             global working_counter
             global current_session_counter
-            if general_counter ==18000: 
+            if general_counter ==COUNTER: 
                 stopwatch.after(1000,count)
                 display = 'Starting'
                 stopwatch['text']=display
@@ -107,7 +107,7 @@ def time_tracker():
                     working_counter+=1
                     change_time_label(current_session_time,current_session_counter)
                     current_session_counter+=1
-                    if current_session_counter==18900: 
+                    if current_session_counter==COUNTER + 900: 
                         post_message("15 min already",alert=True)
     count()
 
@@ -136,7 +136,7 @@ def ChangeStatus():
         total_number_of_sessions['text'] = str(num_sessions)
     else: 
         current_status = 'waiting'
-        current_session_counter = 18000
+        current_session_counter = COUNTER
         change_time_label(current_session_time,current_session_counter)
         waiting_time['font']='Verdana 19 bold'
         working_time['font']='Verdana 20'
@@ -151,7 +151,7 @@ def EndShift():
     running = False
     window.quit()
     exit_window = create_exit_window()
-    delta_counter = (general_counter -18000)  - ((working_counter - 18000)+(waiting_counter - 18000))
+    delta_counter = (general_counter -COUNTER)  - ((working_counter - COUNTER)+(waiting_counter - COUNTER))
     working_counter +=delta_counter
     change_time_label(total_working_time,working_counter)
     change_time_label(total_waiting_time,waiting_counter)
