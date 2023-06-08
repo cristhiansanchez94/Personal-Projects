@@ -19,6 +19,7 @@ REPLACE_DICT = {
     'remaining_quantity': 'acciones remanentes',
     'remaining_amount': 'cantidad restante (USD)',
     'fifo_average_price': 'precio promedio (FIFO)', 
+    'fifo_average_price_normal': 'precio promedio (FIFO) normal',
     'average_price': 'precio promedio',
     'total_fees': 'total fees',
     'current_value': 'valor actual', 
