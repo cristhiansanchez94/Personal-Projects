@@ -19,7 +19,7 @@ def get_info_for_ticker(ticker):
 
 def set_values_in_vars(ticker_info): 
     avg_price_var.set(ticker_info.get('average_price'))
-    fifo_avg_price_var.set(ticker_info.get('fifo_average_price'))
+    fifo_avg_price_var.set(str(ticker_info.get('fifo_average_price'))+"/"+str(ticker_info.get('fifo_average_price_normal')))
     first_movement_var.set(datetime.strftime(ticker_info.get('min_date'),'%Y-%m-%d'))
     last_movement_var.set(datetime.strftime(ticker_info.get('max_date'),'%Y-%m-%d'))
     available_stocks_var.set(round(ticker_info.get('available_quantity'),2))
