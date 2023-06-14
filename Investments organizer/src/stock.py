@@ -38,6 +38,7 @@ class Stock():
         self.purchase_flags = []
         self.bought_amount_value = 0 
         self.sold_amount_value = 0 
+        self.stock_remainder_fifo = 0
         
     def correct_stock_quantity_and_price(self): 
         if self.quantity*self.average_price <0.05: 
@@ -58,11 +59,15 @@ class Stock():
         first_flag_index = self.purchase_flags.index(1)
         accumulated_quantity = 0 
         for index in range(first_flag_index, len(self.purchase_flags)): 
-            if accumulated_quantity + self.purchased_amounts[index]<=quantity: 
-                accumulated_quantity += self.purchased_amounts[index]
+            available_quantity = accumulated_quantity + self.purchased_amounts[index] if not (index == first_flag_index and self.stock_remainder_fifo!=0) else accumulated_quantity + self.stock_remainder_fifo
+            if available_quantity<=quantity: 
+                if index==first_flag_index and self.stock_remainder_fifo!=0:
+                    accumulated_quantity += self.stock_remainder_fifo
+                else:
+                    accumulated_quantity += self.purchased_amounts[index]
                 self.purchase_flags[index] = 0
             else: 
-                self.stock_remainder_fifo = accumulated_quantity+self.purchased_amounts[index] - quantity 
+                self.stock_remainder_fifo = available_quantity - quantity 
                 break        
         
             
@@ -86,7 +91,6 @@ class Stock():
                 stock_quantity = self.quantity
                 self.average_price = (average_price*stock_quantity + movement_type*quantity*price)/(stock_quantity + movement_type*quantity)
         else: 
-            #Implement fifo methodology
             if self.purchase_flags:
                 purchased_amounts = np.array(self.purchased_amounts)
                 flags = np.array(self.purchase_flags)
@@ -104,9 +108,7 @@ class Stock():
                     self.fifo_average_price_normal = (np.dot(purchased_amounts*flags, purchased_prices)+amount_correction)/(np.sum(purchased_amounts*flags)+quantity_correction)
                 else:
                     self.fifo_average_price = np.dot(purchased_amounts*flags, purchased_prices)/np.sum(purchased_amounts*flags)
-                
-                
-    
+  
     def update_quantity(self, movement_type, quantity): 
         self.quantity += movement_type*quantity
     
@@ -124,10 +126,7 @@ class Stock():
             corrected_df = corrected_df.assign(price = corrected_df.price/split_factor)
             data = pd.concat([corrected_df, normal_df],axis=0)
         self.movements_df = data
-        
-        if self.ticker=='BAC': 
-            print('alto ahí')
-        
+                
         for idx in range(len(data)): 
             movement_data = data.loc[idx, :]            
             movement_type = movement_data['movement_type']
