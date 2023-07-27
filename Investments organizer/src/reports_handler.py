@@ -33,7 +33,7 @@ def generate_reports(split_already = True):
     stock_report = pd.DataFrame(stock_report)
     stock_report = stock_report.assign(portfolio_percentage=stock_report.remaining_amount/stock_report.remaining_amount.sum())
     pl_report = pd.DataFrame(pl_report)    
-    return stock_report, pl_report
+    return stock_report, pl_report, data
 
 def save_report(stock_report, pl_report, path): 
     final_report = {}
