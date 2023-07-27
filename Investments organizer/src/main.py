@@ -3,7 +3,8 @@ from datetime import datetime
 from os.path import join, dirname
 
 from wrappinglabel import WrappingLabel
-from functions import generate_reports, save_report
+from reports_handler import generate_reports, save_report
+from marketstack import get_stock_price
 
 
 stock_report, pl_report = generate_reports()
@@ -15,6 +16,8 @@ LABELS_X = 440
 def get_info_for_ticker(ticker): 
     stock_info = stock_report[stock_report.ticker==ticker].to_dict(orient='list')
     stock_info = {key:stock_info.get(key)[0] for key in stock_info}
+    last_price = get_stock_price(ticker)['last_price']
+    stock_info['last_price'] = last_price 
     return stock_info
 
 def set_values_in_vars(ticker_info): 
