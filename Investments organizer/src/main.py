@@ -7,7 +7,7 @@ from reports_handler import generate_reports, save_report
 from marketstack import get_stock_price
 
 
-stock_report, pl_report = generate_reports()
+stock_report, pl_report, movements_df= generate_reports()
 stock_report = stock_report[(stock_report.available_quantity>0) | (stock_report.remaining_quantity>0)]
 PATH = join(dirname(__file__))
 TICKERS = list(stock_report.ticker.unique())
@@ -16,12 +16,19 @@ LABELS_X = 440
 def get_info_for_ticker(ticker): 
     stock_info = stock_report[stock_report.ticker==ticker].to_dict(orient='list')
     stock_info = {key:stock_info.get(key)[0] for key in stock_info}
-    last_price = get_stock_price(ticker)['last_price']
-    stock_info['last_price'] = last_price 
+    try:
+        last_price = get_stock_price(ticker)['last_price']
+        stock_info['last_price'] = last_price 
+        stock_info['current_value'] = (stock_info.get('available_quantity')+stock_info.get('remaining_quantity'))*last_price
+    except: 
+        stock_info['last_price'] = 'NA'
+        stock_info['current_value'] = 'NA'
     return stock_info
 
 def set_values_in_vars(ticker_info): 
     avg_price_var.set(ticker_info.get('average_price'))
+    real_current_price_var.set(ticker_info.get('last_price'))
+    current_value_var.set(ticker_info.get('current_value'))
     fifo_avg_price_var.set(str(ticker_info.get('fifo_average_price'))+"/"+str(ticker_info.get('fifo_average_price_normal')))
     first_movement_var.set(datetime.strftime(ticker_info.get('min_date'),'%Y-%m-%d'))
     last_movement_var.set(datetime.strftime(ticker_info.get('max_date'),'%Y-%m-%d'))
@@ -107,6 +114,8 @@ window.resizable(0,0)
 
 #Variables 
 avg_price_var = StringVar(window)
+real_current_price_var = StringVar(window)
+current_value_var = StringVar(window)
 fifo_avg_price_var = StringVar(window)
 first_movement_var = StringVar(window)
 last_movement_var = StringVar(window)
@@ -222,7 +231,7 @@ generate_report_button.pack(side='bottom',pady=30)
  
  #Stock selector
 case_select_var = StringVar(window)
-case_select_var.set(TICKERS[0])
+#case_select_var.set(TICKERS[0])
  
 options = OptionMenu(window, case_select_var, *TICKERS, command = update_vars) 
 options.config(width=15, font=('Verdana', 12))
