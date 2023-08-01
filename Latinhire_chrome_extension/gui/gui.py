@@ -146,6 +146,8 @@ class Gui(Tk):
                     if self.current_status=='waiting':
                         change_time_label(self.total_waiting_time,self.waiting_counter)
                         self.waiting_counter+=1
+                        if self.general_counter==COUNTER+2*60*60: 
+                            self.end_shift()
                     else: 
                         change_time_label(self.total_working_time,self.working_counter)
                         self.working_counter+=1
