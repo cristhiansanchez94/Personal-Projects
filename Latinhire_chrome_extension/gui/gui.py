@@ -41,6 +41,7 @@ class Gui(Tk):
     def register_missed_session(self, event=''):
         self.num_missed_sessions+=1
         self.post_message('You just missed a session!. Pay attention', alert=True)
+        self.total_number_of_missed_sessions['text'] = str(self.num_missed_sessions)
         
     def write_data_to_gdrive(self, folder_text_field,file_text_field): 
         '''Function used to save the results to google drive
@@ -223,4 +224,3 @@ class Gui(Tk):
         
     def run(self):
         self.mainloop()
-

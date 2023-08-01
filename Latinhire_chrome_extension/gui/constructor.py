@@ -17,9 +17,15 @@ def set_labels(gui):
     number_of_sessions = Label(gui,text='Number of sessions', fg='black',font='Verdana 18')
     number_of_sessions.place(x=0,y=50)
     gui.number_of_sessions = number_of_sessions
+    number_of_missed_sessions = Label(gui,text='Missed sessions', fg='black',font='Verdana 18')
+    number_of_missed_sessions.place(x=550,y=50)
+    gui.number_of_missed_sessions = number_of_missed_sessions
     total_number_of_sessions = Label(gui, text=str(0), fg='black', font='Verdana 30')
     total_number_of_sessions.place(x=100,y=80)
     gui.total_number_of_sessions = total_number_of_sessions
+    total_number_of_missed_sessions = Label(gui, text=str(0), fg='black', font='Verdana 30')
+    total_number_of_missed_sessions.place(x=650,y=80)
+    gui.total_number_of_missed_sessions = total_number_of_missed_sessions
     stopwatch = Label(gui, text=gui.string,fg='black',font='Verdana 40 bold')
     stopwatch.place(x=250,y=75)
     gui.stopwatch = stopwatch
