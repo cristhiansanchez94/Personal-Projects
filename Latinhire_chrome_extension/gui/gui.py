@@ -54,7 +54,7 @@ class Gui(Tk):
         working_minutes = calculate_minutes(self.working_counter)
         waiting_minutes = calculate_minutes(self.waiting_counter)
         try: 
-            DataWriter.DataWriter().writeData(SheetTitle,FolderTitle,waiting_minutes,working_minutes,self.num_sessions)
+            DataWriter.DataWriter().writeData(SheetTitle,FolderTitle,waiting_minutes,working_minutes,self.num_sessions, self.num_missed_sessions)
             self.post_message('Data saved successfully')
         except Exception as e: 
             print(traceback.format_exc())
