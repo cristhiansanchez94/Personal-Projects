@@ -11,13 +11,15 @@ COUNTER = -3600
 class Gui(Tk):
     def __init__(self):
         super().__init__()
-          
+        
+        self.counter = COUNTER  
         self.general_counter = COUNTER
         self.waiting_counter = COUNTER
         self.working_counter = COUNTER
         self.current_session_counter = COUNTER   
         self.running = False  
         self.num_sessions = 0
+        self.num_missed_sessions = 0
         
         self.text1Dict = text1Dict 
         self.text1Dict_spa = text1Dict_spa 
@@ -33,6 +35,10 @@ class Gui(Tk):
         self.bind("<<StatusChanged>>", self.change_status)
         self.bind("<<StartShift>>", lambda event: self.start_shift(event,self.waiting_time))
         self.bind("<<EndShift>>", self.end_shift)
+        self.bind("<<EndShiftUnexp>>", self.end_shift_unexpected)
+        
+    def register_missed_session(self):
+        self.num_missed_sessions+=1
         
     def write_data_to_gdrive(self, folder_text_field,file_text_field): 
         '''Function used to save the results to google drive
@@ -95,6 +101,9 @@ class Gui(Tk):
         '''Function to close all open windows from the exit window'''
         self.destroy()
         
+    def end_shift_unexpected(self, event=''):
+        self.post_message('End shift signal was received unexpectedly. The shift is not over!', alert=True)
+    
     def post_message(self, message,error=False, alert = False):
         '''Function used to create a window with a message
         Inputs: 
