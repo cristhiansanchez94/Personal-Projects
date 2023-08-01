@@ -20,6 +20,7 @@ class Gui(Tk):
         self.running = False  
         self.num_sessions = 0
         self.num_missed_sessions = 0
+        self.partial_missed_counter = 0
         
         self.text1Dict = text1Dict 
         self.text1Dict_spa = text1Dict_spa 
@@ -40,8 +41,12 @@ class Gui(Tk):
         
     def register_missed_session(self, event=''):
         self.num_missed_sessions+=1
-        self.post_message('You just missed a session!. Pay attention', alert=True)
+        self.partial_missed_counter+=1
         self.total_number_of_missed_sessions['text'] = str(self.num_missed_sessions)
+        if self.partial_missed_counter!=2:
+            self.post_message('You just missed a session!. Pay attention', alert=True)
+        else: 
+            self.partial_missed_counter = 0
         
     def write_data_to_gdrive(self, folder_text_field,file_text_field): 
         '''Function used to save the results to google drive
