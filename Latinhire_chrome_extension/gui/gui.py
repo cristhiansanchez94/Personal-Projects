@@ -36,9 +36,11 @@ class Gui(Tk):
         self.bind("<<StartShift>>", lambda event: self.start_shift(event,self.waiting_time))
         self.bind("<<EndShift>>", self.end_shift)
         self.bind("<<EndShiftUnexp>>", self.end_shift_unexpected)
+        self.bind("<<MissedSession>>", self.register_missed_session)
         
-    def register_missed_session(self):
+    def register_missed_session(self, event=''):
         self.num_missed_sessions+=1
+        self.post_message('You just missed a session!. Pay attention', alert=True)
         
     def write_data_to_gdrive(self, folder_text_field,file_text_field): 
         '''Function used to save the results to google drive

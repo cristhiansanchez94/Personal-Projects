@@ -19,6 +19,7 @@ class Flask_api():
         @self.app.route('/missed_session')
         def missed_session():
             if self.gui.running:
+                self.gui.event_generate("<<MissedSession>>", when='tail')
                 return "OK",200
             else: 
                 return "App was not running", 200

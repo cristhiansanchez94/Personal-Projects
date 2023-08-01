@@ -16,6 +16,11 @@ def change_status():
     print('change_status')
     return "OK", 200
 
+@app.route('/missed_session')
+def missed_session():
+    print('missed_session')
+    return "OK",200
+
 @app.route('/end_shift')
 def end_shift():
     print('end_shift')

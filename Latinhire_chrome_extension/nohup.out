@@ -1,0 +1,68 @@
+Listening on http://127.0.0.1:5000
+
+ * Serving Flask app 'api'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+Listening on http://127.0.0.1:5000
+
+ * Serving Flask app 'api'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [31/Jul/2023 14:47:46] "GET /start_shift HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2023 14:47:53] "GET /end_shift HTTP/1.1" 200 -
+Listening on http://127.0.0.1:5000
+
+ * Serving Flask app 'api'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+Listening on http://127.0.0.1:5000
+
+ * Serving Flask app 'api'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [31/Jul/2023 14:52:52] "GET /change_status HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2023 14:52:52] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [31/Jul/2023 14:52:57] "GET /start_shift HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2023 14:53:07] "GET /change_status HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2023 14:53:13] "GET /change_status HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2023 14:53:20] "GET /end_shift HTTP/1.1" 200 -
+Listening on http://127.0.0.1:5000
+
+ * Serving Flask app 'api'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [31/Jul/2023 14:53:51] "OPTIONS /start_shift HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2023 14:53:51] "GET /start_shift HTTP/1.1" 200 -
+Listening on http://127.0.0.1:5000
+
+ * Serving Flask app 'api'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [01/Aug/2023 12:55:16] "OPTIONS /start_shift HTTP/1.1" 200 -
+127.0.0.1 - - [01/Aug/2023 12:55:16] "GET /start_shift HTTP/1.1" 200 -
+127.0.0.1 - - [01/Aug/2023 12:55:44] "OPTIONS /change_status HTTP/1.1" 200 -
+127.0.0.1 - - [01/Aug/2023 12:55:44] "GET /change_status HTTP/1.1" 200 -
+127.0.0.1 - - [01/Aug/2023 12:55:53] "OPTIONS /change_status HTTP/1.1" 200 -
+127.0.0.1 - - [01/Aug/2023 12:55:53] "GET /change_status HTTP/1.1" 200 -
+127.0.0.1 - - [01/Aug/2023 12:55:55] "OPTIONS /end_shift HTTP/1.1" 200 -
+127.0.0.1 - - [01/Aug/2023 12:55:55] "GET /end_shift HTTP/1.1" 200 -
+127.0.0.1 - - [01/Aug/2023 12:56:09] "OPTIONS /start_shift HTTP/1.1" 200 -
+127.0.0.1 - - [01/Aug/2023 12:56:09] "GET /start_shift HTTP/1.1" 200 -
+127.0.0.1 - - [01/Aug/2023 12:56:21] "OPTIONS /change_status HTTP/1.1" 200 -
+127.0.0.1 - - [01/Aug/2023 12:56:21] "GET /change_status HTTP/1.1" 200 -
+127.0.0.1 - - [01/Aug/2023 12:56:35] "OPTIONS /change_status HTTP/1.1" 200 -
+127.0.0.1 - - [01/Aug/2023 12:56:35] "GET /change_status HTTP/1.1" 200 -
+127.0.0.1 - - [01/Aug/2023 12:56:42] "OPTIONS /end_shift HTTP/1.1" 200 -
+127.0.0.1 - - [01/Aug/2023 12:56:42] "GET /end_shift HTTP/1.1" 200 -
