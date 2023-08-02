@@ -1,4 +1,4 @@
-from flask import Flask,jsonify
+from flask import Flask,jsonify, request
 
 app = Flask(__name__)
 
@@ -6,9 +6,10 @@ app = Flask(__name__)
 def health_check():
     return "all good", 200
 
-@app.route('/status_check')
+@app.route('/health_check')
 def status_check():
     current_status = 'status_check'
+    
     return jsonify({'current_status':current_status}),200
     
 @app.route('/change_status')

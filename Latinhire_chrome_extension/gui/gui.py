@@ -21,6 +21,7 @@ class Gui(Tk):
         self.num_sessions = 0
         self.num_missed_sessions = 0
         self.partial_missed_counter = 0
+        self.num_working_hours = 2
         
         self.text1Dict = text1Dict 
         self.text1Dict_spa = text1Dict_spa 
@@ -146,7 +147,7 @@ class Gui(Tk):
                     if self.current_status=='waiting':
                         change_time_label(self.total_waiting_time,self.waiting_counter)
                         self.waiting_counter+=1
-                        if self.general_counter==COUNTER+2*60*60: 
+                        if self.general_counter==COUNTER+self.num_working_hours*60*60: 
                             self.end_shift()
                     else: 
                         change_time_label(self.total_working_time,self.working_counter)
@@ -201,6 +202,10 @@ class Gui(Tk):
         Label(exit_window,text=self.num_sessions, fg='black', font='Verdana 13').place(x=300,y=150)
         Label(exit_window,text=self.num_missed_sessions, fg='black', font='Verdana 13').place(x=300,y=200)
         exit_window.mainloop()
+        
+    def update_working_hours(self, *args): 
+        working_hours_selector_value = self.working_hours_select_var.get()
+        self.num_working_hours = working_hours_selector_value
         
     def update_texts(self, *args):
         '''

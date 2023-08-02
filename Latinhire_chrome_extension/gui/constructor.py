@@ -69,6 +69,19 @@ def set_selectors(gui):
     Radiobutton(gui, text='Spanish', value=0, variable=language_var).place(x=460,y=250)
     Radiobutton(gui, text='English', value=1, variable=language_var).place(x=560,y=250)
 
+    #Working hours selector
+    Label(gui, text='Number of working hours:', fg='black', font='Verdana 10 bold').place(x=0,y=450)
+    working_hours = [i for i in range(2,10,2)]
+    working_hours_select_var = StringVar(gui) 
+    working_hours_select_var.set(working_hours[0])
+    gui.working_hours_select_var = working_hours_select_var
+    
+    working_hours_selector = OptionMenu(gui, working_hours_select_var, *working_hours)
+    working_hours_selector.config(width=4, font=('Verdana',12))
+    working_hours_selector.place(x=180,y=450)
+    working_hours_select_var.trace("w", gui.update_working_hours)
+    
+    
     #Case selector 
     Label(gui, text='Case:', fg='black', font='Verdana 10 bold').place(x=0,y=250)
     cases = list(gui.text1Dict.keys())
