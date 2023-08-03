@@ -205,7 +205,7 @@ class Gui(Tk):
         
     def update_working_hours(self, *args): 
         working_hours_selector_value = self.working_hours_select_var.get()
-        self.num_working_hours = working_hours_selector_value
+        self.num_working_hours = int(working_hours_selector_value)
         
     def update_texts(self, *args):
         '''
