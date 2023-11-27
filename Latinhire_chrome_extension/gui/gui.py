@@ -177,10 +177,13 @@ class Gui(Tk):
             self.total_number_of_sessions['text'] = str(self.num_sessions)
         else: 
             self.current_status = 'waiting'
-            self.current_session_counter = COUNTER
-            change_time_label(self.current_session_time,self.current_session_counter)
-            self.waiting_time['font']='Verdana 19 bold'
-            self.working_time['font']='Verdana 20'
+            if self.general_counter>=COUNTER+self.num_working_hours*60*60: 
+                self.end_shift()
+            else: 
+                self.current_session_counter = COUNTER
+                change_time_label(self.current_session_time,self.current_session_counter)
+                self.waiting_time['font']='Verdana 19 bold'
+                self.working_time['font']='Verdana 20'
         
     def end_shift(self,event=''): 
         '''Activation function of the 'End Shift' button'''
