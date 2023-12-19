@@ -26,7 +26,7 @@ text1Dict_spa= {
 }
 text2Dict = {
     'End session':'I just wanted to double-check that my explanation was clear -if you\'re still there please let me know in the chat, otherwise I\'ll go ahead and wrap up our session. I\'d really appreciate you letting me know how I did by rating our session after you exit. Thanks and have a great day!',
-    'Cheating':'Unfortunately, I can’t help you as this appears to be a quiz, test, or assessment, and is a violation of Brainly’s Community Guidelines. Please review our Honor Code prior to requesting tutoring in the future: https://brainly.com/honor-code. Keep in mind that if you attempt to use Brainly to cheat again, further action may be taken on your account.',
+    'Cheating':'Thank you for your honesty. I’m afraid I can’t help you with quizzes, tests, or assessments, as it violates Brainly’s Community Guidelines. I would be happy to assist you with any doubts or questions in the future! Remember to review our Honor Code before requesting tutoring in the future: https://brainly.com/honor-code.',
     'Off-Topic':'You’ve repeatedly broken our community guidelines, so I’ll be ending and reporting this session now. Please review our community guidelines here brainly.com/community-guidelines before requesting Brainly Tutoring in the future.',
     'Offensive Language':'I’ll be ending and reporting this session now because you’ve repeatedly violated our guidelines. Please review them at brainly.com/community-guidelines before using Brainly tutoring again.',
     'Disrespectful':'I’ll be ending and reporting this session now because you’ve repeatedly violated our guidelines. Please review them at brainly.com/community-guidelines prior to using Brainly tutoring again.',
